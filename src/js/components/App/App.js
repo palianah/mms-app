@@ -1,9 +1,12 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
+/* import { Query } from 'react-apollo';
+import gql from 'graphql-tag'; */
 import Panels from '../Panels/Panels';
 import Header from '../Header/Header';
 import './App.css';
+
 
 type Props = {
   dispatch: Function,

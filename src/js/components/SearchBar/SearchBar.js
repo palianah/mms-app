@@ -51,7 +51,6 @@ export class SearchBar extends Component<Props, State> {
   }
 
   render() {
-    console.log(this.props, this.state);
     return (
       <div className="SearchBar">
         <FieldWrap>
