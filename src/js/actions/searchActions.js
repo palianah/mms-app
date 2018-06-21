@@ -1,18 +1,18 @@
 // @flow
 
-import {
-    SEARCH_ISSUES,
-  } from '../constants/actionTypes';
+import { SEARCH_ISSUES } from '../constants/actionTypes';
 import type { ActionCreator } from '../types/action';
+
   
-  
-  /**
-  * Search Actions
-  */
-  
-  export function search(term: string): ActionCreator {
+/**
+* Search Actions
+*/
+
+export function search(term: string): ActionCreator {
+  return (dispatch, getState) => {
     return {
       type: SEARCH_ISSUES,
       payload: { term },
     };
-  }
+  };
+}

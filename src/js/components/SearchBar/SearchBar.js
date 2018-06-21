@@ -13,8 +13,8 @@ import './SearchBar.css';
 
 type Props = {
   dispatch: Function,
+  initialTerm: string,
   searchIssues: Function,
-  term: string,
 };
 
 type State = {
@@ -35,7 +35,7 @@ export class SearchBar extends Component<Props, State> {
     super(props);
 
     this.state = {
-      term: '',
+      term: this.props.initialTerm,
     };
 
     this.handleSearchChange = this.handleSearchChange.bind(this);
@@ -79,7 +79,7 @@ export class SearchBar extends Component<Props, State> {
 
 const mapStateToProps = (state: Object) => (
   {
-    term: state.search,
+    initialTerm: state.search,
   }
 );
 const mapDispatchToProps = dispatch => {
