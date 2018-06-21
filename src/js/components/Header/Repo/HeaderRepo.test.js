@@ -8,14 +8,15 @@ import HeaderRepo from './HeaderRepo';
 configure({ adapter: new Adapter() });
 
 describe('<HeaderRepo />', () => {
+  const props = { repoName: 'Test' };
+
   test('Renders without crashing', () => {
-    const wrapper = shallow(<HeaderRepo />);
+    const wrapper = shallow(<HeaderRepo {...props} />);
     expect(wrapper).toHaveLength(1);
   });
 
   test('Displays the corrct repo', () => {
-    const props = { repo: 'Test' };
-    const wrapper = shallow(<HeaderRepo {...props}/>);
-    expect(wrapper.text()).toEqual(props.repo);
+    const wrapper = shallow(<HeaderRepo {...props} />);
+    expect(wrapper.text()).toEqual(props.repoName);
   });
 });

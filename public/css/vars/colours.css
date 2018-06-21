@@ -34,7 +34,7 @@
   --col-darken-10: rgba(0, 0, 0, 1.0);
 
   /* HTML Elements */
-  --col-bg: #fff2f2;
+  --col-bg: var(--col-white);
   --col-placeholder: var(--col-darken-4);
   --col-field-bg: rgba(0, 0, 0, 0.05);
 

@@ -6,12 +6,19 @@ import Panels from '../Panels/Panels';
 import Header from '../Header/Header';
 import './App.css';
 
-class App extends Component {
+type Props = {
+  repoName: string,
+  repoOwner: string,
+}
+
+class App extends Component<Props> {
+  props: Props;
+
   render() {
     return (
       <BrowserRouter>
         <div className="App">
-          <Header />
+          <Header repoName={this.props.repoName} />
           <div className="App__content">
             <Panels />
           </div>
@@ -23,6 +30,8 @@ class App extends Component {
 
 const mapStateToProps = (state: Object) => (
   {
+    repoName: state.repo.name,
+    repoOwner: state.repo.owner,
   }
 );
 

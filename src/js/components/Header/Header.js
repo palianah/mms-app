@@ -9,7 +9,9 @@ import {
 } from '../../constants/routes';
 import './Header.css';
 
-type Props = {};
+type Props = {
+  repoName: string,
+};
 
 
 /**
@@ -23,7 +25,7 @@ export class Header extends Component<Props> {
       <header className="Header" id="header">
         <p className="Header__sitetitle">
           <HeaderTitle link={ROUTE_HOME}><HeaderTitle /></HeaderTitle>
-          <HeaderRepo>React</HeaderRepo>
+          <HeaderRepo repoName={this.props.repoName} />
         </p>
       </header>
     )

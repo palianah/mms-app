@@ -11,18 +11,8 @@ import '../Translation/testData';
 configure({ adapter: new Adapter() });
 
 describe('<Panels />', () => {
-  let props = {};
-
-  beforeEach(() => {
-    props = {
-      dispatch: jest.fn(),
-      classes: [],
-      pupils: {},
-    };
-  });
-
   test('Renders without crashing', () => {
-    const wrapper = shallow(<Provider store={store}><Panels {...props} /></Provider>);
+    const wrapper = shallow(<Provider store={store}><Panels /></Provider>);
     expect(wrapper).toHaveLength(1);
   });
 });

@@ -53,7 +53,9 @@ export default class Translation extends Component<Props> {
   prevLang: string = '';
 
   componentWillMount() {
-    if (window.app.translations.length > 0) this.prevLang = window.app.curLang;
+    if (window.app && window.app.translations) {
+      if (window.app.translations.length > 0) this.prevLang = window.app.curLang;
+    }
   }
 
   shouldComponentUpdate(nextProps: Props) {
@@ -65,7 +67,9 @@ export default class Translation extends Component<Props> {
   }
 
   componentWillUpdate() {
-    if (window.app.translations.length > 0) this.prevLang = window.app.curLang;
+    if (window.app && window.app.translations) {
+      if (window.app.translations.length > 0) this.prevLang = window.app.curLang;
+    }
   }
 
 

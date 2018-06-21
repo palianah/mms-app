@@ -11,9 +11,7 @@ configure({ adapter: new Adapter() });
 
 test('<Header />: Renders without crashing', () => {
   const props = {
-    history: {},
-    location: {},
-    match: {},
+    repoName: 'Test',
   }
   const wrapper = shallow(<MemoryRouter><Header {...props} /></MemoryRouter>);
   expect(wrapper).toHaveLength(1);

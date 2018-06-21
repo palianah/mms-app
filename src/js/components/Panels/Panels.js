@@ -3,8 +3,8 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router';
 import { Route, Switch } from 'react-router-dom';
-import NotFound from '../NotFound/NotFound';
 import HomeLayout from '../../layouts/HomeLayout/HomeLayout';
+import NotFound from '../NotFound/NotFound';
 import {
   ROUTE_HOME,
 } from '../../constants/routes';

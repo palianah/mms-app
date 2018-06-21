@@ -4,7 +4,7 @@ import React, { Component } from 'react';
 import './HeaderRepo.css';
 
 type Props = {
-  repo: string,
+  repoName: string,
 };
 
 
@@ -12,15 +12,11 @@ type Props = {
 * Current repo name.
 */
 export class HeaderRepo extends Component<Props> {
-  static defaultProps = {
-    repo: 'React',
-   };
-
   props: Props;
 
   render() {
     return (
-      <span className="HeaderRepo">{this.props.repo}</span>
+      <span className="HeaderRepo">{this.props.repoName}</span>
     )
   }
 }

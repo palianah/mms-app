@@ -1,1 +1,2 @@
 * Remove flow-typed/classnames
+* https://github.com/facebook/create-react-app/issues/1386
