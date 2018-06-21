@@ -2,5 +2,6 @@
 /* ----- */
 
 :root {
-  --header-height: 6.5rem;
+  --header-height: 7.0rem;
+  --searchbar-height: 6.0rem;
 }

@@ -15,9 +15,7 @@ export class HeaderRepo extends Component<Props> {
   props: Props;
 
   render() {
-    return (
-      <span className="HeaderRepo">{this.props.repoName}</span>
-    )
+    return <span className="HeaderRepo">{this.props.repoName}</span>
   }
 }
 

@@ -22,20 +22,12 @@ export class HeaderTitle extends Component<Props> {
    };
 
   props: Props;
-  appName: string;
-
-  constructor(props: Props) {
-    super(props);
-
-    this.appName = text('Name', 'App');
-    if (this.appName.substr(0, 1) === '?') this.appName = window.app.appName;
-  }
 
   render() {
     return (
       <span className="HeaderTitle">
         <span className="HeaderTitle_icon"><Icon type={this.props.icon} /></span>
-        <span className="HeaderTitle_text">{this.props.appName || this.appName}</span>
+        <span className="HeaderTitle_text">{this.props.appName || text('Name', 'App')}</span>
       </span>
     )
   }

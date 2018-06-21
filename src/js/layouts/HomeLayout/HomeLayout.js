@@ -2,6 +2,8 @@
 
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import IssueList from '../../components/IssueList/IssueList';
+import SearchBar from '../../components/SearchBar/SearchBar';
 import setTitle from '../../utils/title';
 import './HomeLayout.css';
 
@@ -22,7 +24,8 @@ export class HomeLayout extends Component<Props> {
   render() {
     return (
       <div className="HomeLayout">
-        The home layout
+        <SearchBar />
+        <IssueList />
       </div>
     )
   }
