@@ -1,0 +1,34 @@
+{
+  "name": "mms-app",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "react": "^16.4.1",
+    "react-dom": "^16.4.1",
+    "react-redux": "^5.0.7",
+    "react-router-dom": "^4.2.2",
+    "react-router-redux": "^4.0.8",
+    "react-scripts": "1.1.4",
+    "redux": "^3.7.2",
+    "redux-thunk": "^2.2.0"
+  },
+  "devDependencies": {
+    "enzyme": "^3.3.0",
+    "enzyme-adapter-react-16": "^1.1.1",
+    "eslint-plugin-flowtype": "^2.46.3",
+    "eslint-plugin-jest": "^21.15.1",
+    "flow-bin": "^0.60.1",
+    "redux-mock-store": "^1.5.1"
+  },
+  "jest": {
+    "collectCoverageFrom": [
+      "src/js/actions/**/*.{js,jsx}"
+    ]
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
+  }
+}
