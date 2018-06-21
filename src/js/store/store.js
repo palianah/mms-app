@@ -4,7 +4,7 @@
 
 import { createStore, applyMiddleware, compose } from 'redux';
 import thunk from 'redux-thunk';
-import allReducers from '../reducers/reducers';
+import allReducers from '../reducers';
 
 let initialState = {};
 let reduxMiddleware = null;

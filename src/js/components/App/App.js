@@ -1,20 +1,30 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { BrowserRouter } from 'react-router-dom';
 import Translation from '../Translation/Translation';
+import Panels from '../Panels/Panels';
+import Header from '../Header/Header';
 import './App.css';
 
 class App extends Component {
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <h1 className="App-title"><Translation name="Name" ns="App" /></h1>
-        </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
-      </div>
+      <BrowserRouter>
+        <div className="App">
+          <Header />
+          <div className="App__content">
+            <Panels />
+          </div>
+        </div>
+      </BrowserRouter>
     );
   }
 }
 
-export default App;
+const mapStateToProps = (state: Object) => (
+  {
+  }
+);
+
+
+export default connect(mapStateToProps)(App);

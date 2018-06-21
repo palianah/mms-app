@@ -1,9 +1,14 @@
 import React from 'react';
+import { Provider } from 'react-redux';
 import ReactDOM from 'react-dom';
+import { shallow, configure } from 'enzyme';
+import Adapter from 'enzyme-adapter-react-16';
+import store from '../../store/store';
 import App from './App';
 
+configure({ adapter: new Adapter() });
+
 it('renders without crashing', () => {
-  const div = document.createElement('div');
-  ReactDOM.render(<App />, div);
-  ReactDOM.unmountComponentAtNode(div);
+  const wrapper = shallow(<Provider store={store}><App /></Provider>);
+  expect(wrapper).toHaveLength(1);
 });

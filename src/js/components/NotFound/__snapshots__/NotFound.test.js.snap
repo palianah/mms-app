@@ -1,0 +1,23 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<NotFound /> Matches snapshot 1`] = `
+<section
+  className="NotFound"
+>
+  <p
+    className="NotFound__msg"
+  >
+    Page or resource not found
+  </p>
+  <p
+    className="NotFound__submsg"
+  >
+    <a
+      href="/"
+      onClick={[Function]}
+    >
+      Back to Github Issues
+    </a>
+  </p>
+</section>
+`;

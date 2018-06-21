@@ -26,9 +26,12 @@
     ]
   },
   "scripts": {
-    "start": "react-scripts start",
     "build": "react-scripts build",
+    "eject": "react-scripts eject",
+    "start": "react-scripts start",
     "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
+    "testc": "react-scripts test --env=jsdom --coverage",
+    "testcw": "react-scripts test --env=jsdom --coverage --watch",
+    "testv": "react-scripts test --env=jsdom --verbose"
   }
 }

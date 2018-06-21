@@ -12,7 +12,7 @@ configure({ adapter: new Adapter() });
 describe('<Translation />', () => {
   test('Renders without crashing', () => {
     const div = document.createElement('div');
-    ReactDOM.render(<Translation name="ErrorTxt" ns="AppError" />, div);
+    ReactDOM.render(<Translation name="Name" ns="App" />, div);
   });
 
   test('Renders the correct translation', () => {
@@ -21,11 +21,11 @@ describe('<Translation />', () => {
   });
 
   test('Handles Language change', () => {
-    const wrapper = mount(<Translation name="ErrorTxt" ns="AppError" />);
-    expect(wrapper.text()).toBe(window.app.translations.EN.AppError.ErrorTxt);
+    const wrapper = mount(<Translation name="Name" ns="App" />);
+    expect(wrapper.text()).toBe(window.app.translations.EN.App.Name);
     window.app.curLang = 'DE';
-    wrapper.instance().forceUpdate(); // Todo: forcing until wrapper.update() is fixed.
-    expect(wrapper.text()).toBe(window.app.translations.DE.AppError.ErrorTxt);
+    wrapper.instance().forceUpdate();
+    expect(wrapper.text()).toBe(window.app.translations.DE.App.Name);
     window.app.curLang = 'EN';
   });
 });

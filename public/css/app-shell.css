@@ -4,8 +4,14 @@
   /* Fonts */
 @import "./fonts/fonts.css";
 
+  /* Vars */
+@import "./vars/colours.css";
+@import "./vars/sizes.css";
+@import "./vars/typography.css";
+@import "./vars/ui.css";
+@import "./vars/zindexes.css";
+
   /* Base */
 @import "./base/normalize.css";
-@import "./base/vars.css";
 @import "./base/keyframes.css";
 @import "./base/tags.css";
