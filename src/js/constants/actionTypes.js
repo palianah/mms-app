@@ -2,5 +2,8 @@
 * Action Type Constants
 */
 
-// App
-// export const APP_ERRORED = 'APP_ERRORED';
+// Languages
+export const CHANGE_LANGUAGE = 'CHANGE_LANGUAGE';
+
+// Repo
+export const REPO_CHANGE = 'REPO_CHANGE';

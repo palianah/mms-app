@@ -9,12 +9,12 @@ import '../Translation/testData';
 configure({ adapter: new Adapter() });
 
 describe('<NotFound />', () => {
-  it('Renders without crashing', () => {
+  test('Renders without crashing', () => {
     const wrapper = shallow(<NotFound />);
     expect(wrapper).toHaveLength(1);
   });
 
-  it('Matches snapshot', () => {
+  test('Matches snapshot', () => {
     expect(renderer.create(<MemoryRouter><NotFound /></MemoryRouter>).toJSON()).toMatchSnapshot();
   });
 });

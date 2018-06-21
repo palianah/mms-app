@@ -4,6 +4,9 @@
 * Reducers
 */
 import { combineReducers } from 'redux';
+import repo from './repo';
 
 
-export default combineReducers({});
+export default combineReducers({
+  repo,
+});

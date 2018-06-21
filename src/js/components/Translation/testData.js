@@ -1,5 +1,8 @@
 // @flow
 
+/**
+ * Dummy language data to be used in tests.
+ */
 window.app = {
   translations: {
     EN: {

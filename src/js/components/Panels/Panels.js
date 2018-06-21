@@ -4,6 +4,7 @@ import React, { Component } from 'react';
 import { withRouter } from 'react-router';
 import { Route, Switch } from 'react-router-dom';
 import NotFound from '../NotFound/NotFound';
+import HomeLayout from '../../layouts/HomeLayout/HomeLayout';
 import {
   ROUTE_HOME,
 } from '../../constants/routes';
@@ -15,8 +16,6 @@ type Props = {
   match: Object,
 };
 
-const Todo = () => 'Todo...';
-
 
 /**
 * Panels containing the main app content.
@@ -24,14 +23,11 @@ const Todo = () => 'Todo...';
 export class Panels extends Component<Props> {
   props: Props;
 
-  componentDidMount() {
-  }
-
   render() {
     return (
       <div className="Panels">
         <Switch>
-          <Route exact={true} path={ROUTE_HOME} component={Todo} />
+          <Route exact={true} path={ROUTE_HOME} component={HomeLayout} />
           <Route component={NotFound} />
         </Switch>
       </div>
