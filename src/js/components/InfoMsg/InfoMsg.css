@@ -30,12 +30,13 @@
 }
 
 .InfoMsg__sub a {
-    color: var(--col-brand);
+    color: var(--col-darken-3);
     text-decoration: none;
 }
 
 .InfoMsg__sub a:focus,
 .InfoMsg__sub a:hover {
+    color: var(--col-brand);
     text-decoration: underline;
 }
 

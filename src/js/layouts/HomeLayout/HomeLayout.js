@@ -9,6 +9,10 @@ import { ICON_LOGIN } from '../../constants/icons';
 import './HomeLayout.css';
 
 type Props = {
+  initialToken: string,
+};
+
+type State = {
   token: string,
 };
 
@@ -16,24 +20,33 @@ type Props = {
 /**
 * Home Layout.
 */
-export class HomeLayout extends Component<Props> {
+export class HomeLayout extends Component<Props, State> {
   props: Props;
+  state: State;
+  handleOnChange: Function
 
-  /* constructor(props: Props) {
+  constructor(props: Props) {
     super(props);
+
+    this.state = {
+      token: this.props.initialToken,
+    };
+
+    this.handleOnChange = this.handleOnChange.bind(this);
   }
 
-  componentDidMount() {
-
-  } */
+  handleOnChange(event: SyntheticInputEvent<HTMLInputElement>) {
+    const newToken = event.currentTarget.value.replace(/ /g, '');
+    this.setState({ token: newToken });
+  }
 
   render() {
     return (
       <div className="HomeLayout">
         <InfoMsg icon={ICON_LOGIN} msg={text('Access', 'HomeLayout')}>
-          <TextInput value={this.props.token} msg={text('Placeholder', 'HomeLayout')} />
+          <TextInput onBlur={this.handleOnChange}  onChange={this.handleOnChange} value={this.state.token} msg={text('Placeholder', 'HomeLayout')} />
           <p>
-            <a target="_blank" href="https://help.github.com/articles/creating-a-personal-access-token-for-the-command-line/">
+            <a target="_blank" rel="noopener noreferrer" href="https://help.github.com/articles/creating-a-personal-access-token-for-the-command-line/">
               Don't have a token or don't know what they are?
             </a>
           </p>
@@ -46,7 +59,7 @@ export class HomeLayout extends Component<Props> {
 
 const mapStateToProps = (state: Object) => (
   {
-    token: state.token,
+    initialToken: state.token,
   }
 );
 

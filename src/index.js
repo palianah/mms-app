@@ -27,6 +27,8 @@ client
 })
 .then(result => console.log('result', result))
 .catch(error => console.log('error', error));
+console.log('client', client)
+console.log('client.query', client.query)
 
 const AppWithApolloProvider = () => (
   <ApolloProvider client={client}>
