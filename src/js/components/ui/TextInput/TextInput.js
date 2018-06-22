@@ -6,6 +6,7 @@ import './TextInput.css';
 
 type Props = {
   className?: string,
+  defaultValue?: string,
   disabled?: boolean,
   isValid?: boolean,
   maxLength?: number,
@@ -42,6 +43,7 @@ class TextInput extends React.Component<Props> {
     return (
         <input
           className={classes}
+          defaultValue={this.props.defaultValue}
           disabled={this.props.disabled}
           name={this.props.name}
           maxLength={this.props.maxLength}

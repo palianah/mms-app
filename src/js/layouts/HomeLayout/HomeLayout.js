@@ -1,11 +1,15 @@
 // @flow
 
 import React, { Component } from 'react';
-import IssueList from '../../components/IssueList/IssueList';
-import SearchBar from '../../components/SearchBar/SearchBar';
+import { connect } from 'react-redux';
+import InfoMsg from '../../components/InfoMsg/InfoMsg';
+import TextInput from '../../components/ui/TextInput/TextInput';
+import { text } from '../../components/Translation/Translation';
+import { ICON_LOGIN } from '../../constants/icons';
 import './HomeLayout.css';
 
 type Props = {
+  token: string,
 };
 
 
@@ -15,18 +19,36 @@ type Props = {
 export class HomeLayout extends Component<Props> {
   props: Props;
 
-  componentDidMount() {
+  /* constructor(props: Props) {
+    super(props);
   }
+
+  componentDidMount() {
+
+  } */
 
   render() {
     return (
       <div className="HomeLayout">
-        <SearchBar />
-        <IssueList />
+        <InfoMsg icon={ICON_LOGIN} msg={text('Access', 'HomeLayout')}>
+          <TextInput value={this.props.token} msg={text('Placeholder', 'HomeLayout')} />
+          <p>
+            <a target="_blank" href="https://help.github.com/articles/creating-a-personal-access-token-for-the-command-line/">
+              Don't have a token or don't know what they are?
+            </a>
+          </p>
+        </InfoMsg>
       </div>
     )
   }
 }
 
 
-export default HomeLayout;
+const mapStateToProps = (state: Object) => (
+  {
+    token: state.token,
+  }
+);
+
+
+export default connect(mapStateToProps)(HomeLayout);

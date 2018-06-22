@@ -6,6 +6,7 @@
     "apollo-boost": "^0.1.10",
     "graphql": "^0.13.2",
     "graphql-tag": "^2.9.2",
+    "jest-localstorage-mock": "^2.2.0",
     "react": "^16.4.1",
     "react-apollo": "^2.1.6",
     "react-dom": "^16.4.1",

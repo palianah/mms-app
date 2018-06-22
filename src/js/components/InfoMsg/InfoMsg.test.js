@@ -3,12 +3,12 @@
 import React from 'react';
 import { shallow, configure } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
-import IssueListInfo from './IssueListInfo';
+import InfoMsg from './InfoMsg';
 
 configure({ adapter: new Adapter() });
 
-test('<IssueListInfo />: Renders without crashing', () => {
+test('<InfoMsg />: Renders without crashing', () => {
   const props = { msg: 'Information...' }
-  const wrapper = shallow(<IssueListInfo {...props} />);
+  const wrapper = shallow(<InfoMsg {...props} />);
   expect(wrapper).toHaveLength(1);
 });

@@ -4,9 +4,11 @@ import React, { Component } from 'react';
 import { withRouter } from 'react-router';
 import { Route, Switch } from 'react-router-dom';
 import HomeLayout from '../../layouts/HomeLayout/HomeLayout';
+import IssuesLayout from '../../layouts/IssuesLayout/IssuesLayout';
 import NotFound from '../NotFound/NotFound';
 import {
   ROUTE_HOME,
+  ROUTE_ISSUES,
 } from '../../constants/routes';
 import './Panels.css';
 
@@ -28,6 +30,7 @@ export class Panels extends Component<Props> {
       <div className="Panels">
         <Switch>
           <Route exact={true} path={ROUTE_HOME} component={HomeLayout} />
+          <Route path={ROUTE_ISSUES} component={IssuesLayout} />
           <Route component={NotFound} />
         </Switch>
       </div>

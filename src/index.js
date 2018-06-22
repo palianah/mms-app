@@ -11,7 +11,7 @@ import registerServiceWorker from './registerServiceWorker';
 import './index.css';
 
 const client = new ApolloClient({
-  link: new HttpLink({ uri: GQL_ENDPOINT + '?access_token=XXX_ADD_TOKEN_HERE_XXX' }),
+  link: new HttpLink({ uri: GQL_ENDPOINT + '?access_token=###TOKEN###' }),
   cache: new InMemoryCache()
 });
 

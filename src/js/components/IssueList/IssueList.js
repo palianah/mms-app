@@ -1,7 +1,7 @@
 // @flow
 
 import React, { Component } from 'react';
-import IssueListInfo from './Info/IssueListInfo';
+import InfoMsg from '../InfoMsg/InfoMsg';
 import { text } from '../../components/Translation/Translation';
 import './IssueList.css';
 
@@ -23,7 +23,7 @@ export class IssueList extends Component<Props> {
   render() {
     return (
       <div className="IssueList">
-        <IssueListInfo msg={text('Empty', 'IssueList')} />
+        <InfoMsg msg={text('Empty', 'IssueList')} />
       </div>
     )
   }
