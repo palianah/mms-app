@@ -10,10 +10,10 @@ import type { ActionObj } from '../types/action';
 /**
 * Search Reducer.
 */
-export default function reducer(state: string = '', action: ActionObj) {
+export default function reducer(state: string = '', action: ActionObj): string {
   switch (action.type) {
     case SEARCH_ISSUES:
-      if (action.payload !== undefined && action.payload.term !== undefined) {
+      if (action.payload !== undefined && typeof action.payload.term === 'string') {
         return action.payload.term;
       }
       break;

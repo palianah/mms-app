@@ -10,12 +10,3 @@
 	align-items: center;
 	padding: 10px 20px;
 }
-
-.HomeLayout .InfoMsg__sub {
-	max-width: 480px;
-	width: 100%;
-}
-
-.HomeLayout .InfoMsg__sub .TextInput {
-	margin-bottom: 40px;
-}

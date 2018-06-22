@@ -11,7 +11,7 @@ import type { IssueType } from '../types/issue';
 /**
 * Repo Reducer.
 */
-export default function reducer(state: Array<IssueType> = [], action: ActionObj) {
+export default function reducer(state: Array<IssueType> = [], action: ActionObj): Array<IssueType> {
   switch (action.type) {
     default:
       return state;

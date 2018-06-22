@@ -40,14 +40,4 @@ describe('<Button />:', () => {
     expect(cn1Wrapper.find('.Button').hasClass('TestClass')).toEqual(false);
     expect(cn2Wrapper.find('.Button').hasClass('TestClass')).toEqual(true);
   });
-
-  test('Handles isValid property', () => {
-    const iv1Props = { isValid: true };
-    const iv1Wrapper = shallow(<Button {...iv1Props} />);
-    const iv2Props = { isValid: false };
-    const iv2Wrapper = shallow(<Button {...iv2Props} />);
-
-    expect(iv1Wrapper.find('.Button').hasClass(UI_ERROR_CLASS)).toEqual(false);
-    expect(iv2Wrapper.find('.Button').hasClass(UI_ERROR_CLASS)).toEqual(true);
-  });
 });

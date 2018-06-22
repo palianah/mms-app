@@ -8,10 +8,8 @@ import type { ActionCreator } from '../types/action';
 */
 
 export function search(term: string): ActionCreator {
-  return (dispatch, getState) => {
-    return {
-      type: SEARCH_ISSUES,
-      payload: { term },
-    };
+  return {
+    type: SEARCH_ISSUES,
+    payload: { term },
   };
 }

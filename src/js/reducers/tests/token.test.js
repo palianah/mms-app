@@ -2,7 +2,7 @@
 
 import reducer from '../token';
 import {
-  TOKEN_UPDATE,
+  TOKEN_SET,
 } from '../../constants/actionTypes';
 
 
@@ -19,7 +19,7 @@ describe('Reducer: Repo', () => {
 
   test('Should update the token if in payload', () => {
     const testAction = {
-      type: TOKEN_UPDATE,
+      type: TOKEN_SET,
       payload: { token: 'letmein' },
     };
     expect(reducer(INITIAL_STATE, testAction)).toEqual(testAction.payload.token);
@@ -27,15 +27,15 @@ describe('Reducer: Repo', () => {
 
   test('Should return existing state if the token is not a string', () => {
     const booleanAction = {
-      type: TOKEN_UPDATE,
+      type: TOKEN_SET,
       payload: { token: false },
     };
     const undefinedAction = {
-      type: TOKEN_UPDATE,
+      type: TOKEN_SET,
       payload: { token: undefined },
     };
     const integerAction = {
-      type: TOKEN_UPDATE,
+      type: TOKEN_SET,
       payload: { token: 2323 },
     };
     expect(reducer(INITIAL_STATE, booleanAction)).toEqual(INITIAL_STATE);

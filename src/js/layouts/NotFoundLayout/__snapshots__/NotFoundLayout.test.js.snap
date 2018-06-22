@@ -1,0 +1,32 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<NotFoundLayout />: Matches snapshot 1`] = `
+<section
+  className="NotFoundLayout"
+>
+  <section
+    className="InfoMsg"
+  >
+    <i
+      className="Icon icofont icofont-ui-block"
+    />
+    <div
+      className="InfoMsg__msg"
+    >
+      ?Message:NotFoundLayout
+    </div>
+    <div
+      className="InfoMsg__sub"
+    >
+      <p>
+        <a
+          href="/"
+          onClick={[Function]}
+        >
+          ?Back:NotFoundLayout
+        </a>
+      </p>
+    </div>
+  </section>
+</section>
+`;

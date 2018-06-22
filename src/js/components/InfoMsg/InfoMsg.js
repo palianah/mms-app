@@ -26,11 +26,11 @@ export class InfoMsg extends React.Component<Props> {
 
   render() {
     return (
-      <div className="InfoMsg">
+      <section className="InfoMsg">
         <Icon type={this.props.icon} />
         <div className="InfoMsg__msg">{this.props.msg}</div>
         { this.props.children && <div className="InfoMsg__sub">{this.props.children}</div> }
-      </div>
+      </section>
     )
   }
 }

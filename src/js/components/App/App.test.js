@@ -8,7 +8,7 @@ import App from './App';
 
 configure({ adapter: new Adapter() });
 
-test('renders without crashing', () => {
+test('<App />: renders without crashing', () => {
   const wrapper = shallow(<Provider store={store}><App /></Provider>);
   expect(wrapper).toHaveLength(1);
 });

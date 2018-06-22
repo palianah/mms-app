@@ -9,12 +9,13 @@ import TextInput from '../ui/TextInput/TextInput';
 import Translation, { text } from '../Translation/Translation';
 import { ICON_SEARCH } from '../../constants/icons';
 import * as searchActions from '../../actions/searchActions';
+import type { DispatchType, EventHandlerType } from '../../types/functions';
 import './SearchBar.css';
 
 type Props = {
-  dispatch: Function,
+  dispatch: DispatchType,
   initialTerm: string,
-  searchIssues: Function,
+  searchIssues: (term: string) => void,
 };
 
 type State = {
@@ -28,8 +29,8 @@ type State = {
 export class SearchBar extends Component<Props, State> {
   props: Props;
   state: State;
-  handleSearchChange: Function;
-  handleSearchSubmit: Function;
+  handleSearchChange: EventHandlerType;
+  handleSearchSubmit: EventHandlerType;
 
   constructor(props: Props) {
     super(props);
@@ -81,7 +82,7 @@ const mapStateToProps = (state: Object) => (
     initialTerm: state.search,
   }
 );
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch: DispatchType) => {
   return {
     searchIssues: (term: string) => {
       dispatch(searchActions.search(term))

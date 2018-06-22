@@ -27,17 +27,26 @@
 .InfoMsg__sub {
     font-size: var(--font-size);
     margin-top: 10px;
+	max-width: 480px;
+	width: 100%;
 }
 
-.InfoMsg__sub a {
+.InfoMsg__sub p {
     color: var(--col-darken-3);
+}
+
+
+/* Links */
+/* ----- */
+.InfoMsg__sub a {
+    color: var(--col-darken-5);
     text-decoration: none;
 }
 
 .InfoMsg__sub a:focus,
 .InfoMsg__sub a:hover {
     color: var(--col-brand);
-    text-decoration: underline;
+    text-decoration: none;
 }
 
 .InfoMsg__sub a:active {

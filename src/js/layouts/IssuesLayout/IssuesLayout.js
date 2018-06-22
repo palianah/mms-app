@@ -1,11 +1,17 @@
 // @flow
 
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import IssueList from '../../components/IssueList/IssueList';
 import SearchBar from '../../components/SearchBar/SearchBar';
+import { ROUTE_LOGIN } from '../../constants/routes';
 import './IssuesLayout.css';
 
 type Props = {
+  history: Object,
+  location: Object,
+  match: Object,
+  token: string,
 };
 
 
@@ -16,17 +22,25 @@ export class IssuesLayout extends Component<Props> {
   props: Props;
 
   componentDidMount() {
+    if (this.props.token === '') this.props.history.push(ROUTE_LOGIN);
   }
 
   render() {
     return (
-      <div className="IssuesLayout">
+      <section className="IssuesLayout">
         <SearchBar />
         <IssueList />
-      </div>
+      </section>
     )
   }
 }
 
 
-export default IssuesLayout;
+const mapStateToProps = (state: Object) => (
+  {
+    token: state.token,
+  }
+);
+
+
+export default connect(mapStateToProps)(IssuesLayout);

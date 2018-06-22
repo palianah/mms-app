@@ -1,7 +1,7 @@
 // @flow
 
 import {
-  TOKEN_UPDATE,
+  TOKEN_SET,
 } from '../constants/actionTypes';
 
 import type { ActionObj } from '../types/action';
@@ -10,9 +10,9 @@ import type { ActionObj } from '../types/action';
 /**
 * Token Reducer.
 */
-export default function reducer(state: string = '', action: ActionObj) {
+export default function reducer(state: string = '', action: ActionObj): string {
   switch (action.type) {
-    case TOKEN_UPDATE:
+    case TOKEN_SET:
       if (action.payload !== undefined && typeof action.payload.token === 'string') return action.payload.token;
       break;
 

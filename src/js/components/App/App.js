@@ -5,11 +5,12 @@ import { BrowserRouter } from 'react-router-dom';
 import gql from 'graphql-tag'; */
 import Panels from '../Panels/Panels';
 import Header from '../Header/Header';
+import type { DispatchType } from '../../types/functions';
 import './App.css';
 
 
 type Props = {
-  dispatch: Function,
+  dispatch: DispatchType,
   repoName: string,
   repoOwner: string,
 }

@@ -8,7 +8,7 @@ import { SEARCH_ISSUES } from '../../constants/actionTypes';
 * Search Actions Tests
 */
 
-describe('Actions: searchActions:', () => {
+describe('Actions: searchActions', () => {
   test('search() should set the term', () => {
     const searchTerm = 'Test';
     const EXPECTED_ACTION = {

@@ -1,0 +1,7 @@
+/* Icon */
+/* ---- */
+
+.Icon.icofont-refresh {
+    color: var(--col-text);
+    animation: spinner .75s linear infinite;
+}
