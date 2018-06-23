@@ -16,3 +16,7 @@ export const SEARCH_ISSUES = 'SEARCH_ISSUES';
 export const TOKEN_DEL = 'TOKEN_DEL';
 export const TOKEN_GET = 'TOKEN_GET';
 export const TOKEN_SET = 'TOKEN_SET';
+
+// User
+export const USER_DEL = 'USER_DEL';
+export const USER_SET = 'USER_SET';

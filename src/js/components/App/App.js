@@ -11,6 +11,7 @@ import './App.css';
 
 type Props = {
   dispatch: DispatchType,
+  loggedin: boolean,
   repoName: string,
   repoOwner: string,
 }
@@ -22,7 +23,7 @@ class App extends Component<Props> {
     return (
       <BrowserRouter>
         <div className="App">
-          <Header repoName={this.props.repoName} />
+          <Header repoName={this.props.repoName} loggedin={this.props.loggedin} dispatch={this.props.dispatch} />
           <div className="App__content">
             <Panels />
           </div>
@@ -36,6 +37,7 @@ const mapStateToProps = (state: Object) => (
   {
     repoName: state.repo.name,
     repoOwner: state.repo.owner,
+    loggedin: state.user.loggedin,
   }
 );
 

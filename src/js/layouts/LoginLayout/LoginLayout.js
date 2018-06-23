@@ -8,17 +8,22 @@ import InfoMsg from '../../components/InfoMsg/InfoMsg';
 import TextInput from '../../components/ui/TextInput/TextInput';
 import Translate, { text } from '../../components/Translation/Translation';
 import { ICON_BUSY, ICON_LOGIN } from '../../constants/icons';
-import * as tokenActions from '../../actions/tokenActions';
+import { setToken } from '../../actions/tokenActions';
+import { setUser } from '../../actions/userActions';
 import { ROUTE_ISSUES } from '../../constants/routes';
 import type { DispatchType, EventHandlerType } from '../../types/functions';
+import type { ApolloResponseType } from '../../types/apollo';
+import userDefault from '../../types/user';
 import tokenSchema from '../../validation/schemas/token';
 import gqlQuery from '../../gql/query';
+import userauthQuery from '../../gql/queries/userauth';
 import { ucFirst } from '../../utils/strings';
 import './LoginLayout.css';
 
 type Props = {
   dispatch: DispatchType,
-  dispatchToken: (token: string) => void,
+  setToken: Function,
+  setUser: Function,
   history: Object,
   initialToken: string,
   location: Object,
@@ -56,7 +61,7 @@ export class LoginLayout extends Component<Props, State> {
 
   componentDidUpdate() {
     if (this.state.step === 'submitted') {
-      this.props.dispatchToken(this.state.token);
+      this.props.setToken(this.state.token);
       this.setState({ step: 'checking' });
     } else if (this.state.step === 'checking') {
       this.checkToken();
@@ -73,13 +78,19 @@ export class LoginLayout extends Component<Props, State> {
   }
 
   handleOnKeyUp(event: SyntheticInputEvent<HTMLInputElement>) {
-    if (event.key === 'Enter' && event.currentTarget.value !== '') this.setState({ step: 'submitted' });
+    if (event.currentTarget.value !== '') {
+      if (event.key === 'Enter') {
+        this.setState({ step: 'submitted' });
+      } else if (event.key === 'Escape' || event.key === 'Delete') {
+        this.setState({ token: '' });
+      }
+    }
   }
 
   checkToken() {
-     gqlQuery(window.qlClient)
-      .then((response: mixed) => {
-        this.props.history.push(ROUTE_ISSUES);
+     gqlQuery(window.qlClient, userauthQuery)
+      .then((response: ApolloResponseType) => {
+          this.tokenOk(response.data);
       })
       .catch((error: Object) => {
         this.setState({ 
@@ -87,6 +98,12 @@ export class LoginLayout extends Component<Props, State> {
           errMsg: error.toString(),
         });
       });
+  }
+
+  tokenOk(data: Object) {
+    const newUser = {...userDefault, username: data.viewer.login};
+    this.props.setUser(newUser);
+    this.props.history.push(ROUTE_ISSUES);
   }
 
   render() {
@@ -124,13 +141,6 @@ const mapStateToProps = (state: Object) => (
     initialToken: state.token,
   }
 );
-const mapDispatchToProps = (dispatch: DispatchType) => {
-  return {
-    dispatchToken: (token: string) => {
-      dispatch(tokenActions.set(token));
-    }
-  }
-}
 
 
-export default connect(mapStateToProps, mapDispatchToProps)(LoginLayout);
+export default connect(mapStateToProps, { setToken, setUser })(LoginLayout);

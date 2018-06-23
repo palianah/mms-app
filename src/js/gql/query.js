@@ -9,7 +9,7 @@ import gql from 'graphql-tag';
 * @param { object } gqlClient The instance of the GQL Client.
 * @return The response form the GQL Query.
 */
-const gqlQuery = async (gqlClient: any) => {
+const gqlQuery = async (gqlClient: any, queryStr: string) => {
     const result = await gqlClient.query({
          query: gql`
             {

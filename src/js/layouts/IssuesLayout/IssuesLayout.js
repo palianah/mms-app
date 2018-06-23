@@ -10,8 +10,8 @@ import './IssuesLayout.css';
 type Props = {
   history: Object,
   location: Object,
+  loggedin: boolean,
   match: Object,
-  token: string,
 };
 
 
@@ -22,7 +22,7 @@ export class IssuesLayout extends Component<Props> {
   props: Props;
 
   componentDidMount() {
-    if (this.props.token === '') this.props.history.push(ROUTE_LOGIN);
+    if (!this.props.loggedin) this.props.history.push(ROUTE_LOGIN);
   }
 
   render() {
@@ -38,7 +38,7 @@ export class IssuesLayout extends Component<Props> {
 
 const mapStateToProps = (state: Object) => (
   {
-    token: state.token,
+    loggedin: state.user.loggedin,
   }
 );
 

@@ -4,7 +4,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { mount, shallow, configure } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
-import Translation, { t } from './Translation';
+import Translation from './Translation';
 import './testData';
 
 configure({ adapter: new Adapter() });

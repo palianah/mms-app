@@ -11,6 +11,8 @@ configure({ adapter: new Adapter() });
 
 test('<Header />: Renders without crashing', () => {
   const props = {
+    dispatch: jest.fn(),
+    loggedin: false,
     repoName: 'Test',
   }
   const wrapper = shallow(<MemoryRouter><Header {...props} /></MemoryRouter>);

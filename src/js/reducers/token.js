@@ -3,6 +3,7 @@
 import {
   TOKEN_DEL,
   TOKEN_SET,
+  USER_DEL,
 } from '../constants/actionTypes';
 import type { ActionObj } from '../types/action';
 import { STORAGE_SSKEY } from '../constants/storage';
@@ -13,6 +14,7 @@ import { STORAGE_SSKEY } from '../constants/storage';
 */
 export default function reducer(state: string = '', action: ActionObj): string {
   switch (action.type) {
+    case USER_DEL:
     case TOKEN_DEL:
       sessionStorage.removeItem(STORAGE_SSKEY);
       return '';

@@ -1,7 +1,6 @@
 // @flow
 
-import React, { Component } from 'react';
-import ReactDOMServer from 'react-dom/server';
+import { Component } from 'react';
 
 type Props = {
   name: string,

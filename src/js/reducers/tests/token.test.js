@@ -2,6 +2,7 @@
 
 import reducer from '../token';
 import {
+  TOKEN_DEL,
   TOKEN_SET,
 } from '../../constants/actionTypes';
 
@@ -41,5 +42,9 @@ describe('Reducer: Repo', () => {
     expect(reducer(INITIAL_STATE, booleanAction)).toEqual(INITIAL_STATE);
     expect(reducer(INITIAL_STATE, undefinedAction)).toEqual(INITIAL_STATE);
     expect(reducer(INITIAL_STATE, integerAction)).toEqual(INITIAL_STATE);
+  });
+
+  test('Should delete the token', () => {
+    expect(reducer('Sketchbuch', { type: TOKEN_DEL })).toEqual(INITIAL_STATE);
   });
 });

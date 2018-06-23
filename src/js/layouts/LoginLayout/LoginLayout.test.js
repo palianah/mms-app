@@ -10,7 +10,9 @@ import { createMockStore } from 'redux-test-utils';
 import store from '../../storage/store';
 import ConnectedLoginLayout, { LoginLayout } from './LoginLayout';
 import * as tokenActions from '../../actions/tokenActions';
-import { TOKEN_SET } from '../../constants/actionTypes';
+import { TOKEN_SET, USER_SET } from '../../constants/actionTypes';
+import userDefault from '../../types/user';
+import { ROUTE_ISSUES } from '../../constants/routes';
 import '../../components/Translation/testData';
 
 configure({ adapter: new Adapter() });
@@ -26,7 +28,8 @@ describe('<LoginLayout />:', () => {
   const props = {
     ...propsRouter,
     dispatch: jest.fn(), 
-    dispatchToken: jest.fn(), 
+    setUser: jest.fn(), 
+    setToken: jest.fn(), 
     initialToken: 'letmein',
   };
 
@@ -35,7 +38,7 @@ describe('<LoginLayout />:', () => {
     expect(wrapper).toHaveLength(1);
   });
 
-  test('dispatchToken() should call tokenActions.set() ', () => {
+  test('setToken() should call tokenActions.setToken() ', () => {
     const newVal = 'newval';
     const fakeStore = mockStore({
       token: 'initval',
@@ -54,6 +57,28 @@ describe('<LoginLayout />:', () => {
     const expectedAction = { type: TOKEN_SET, payload: { token: newVal } };
     expect(actions).toEqual([expectedAction]);
   });
+
+  test('setUser() should call userActions.setUser() ', () => {
+    const newUser = {...userDefault, username: 'davelister' };
+    const fakeData = { viewer: { login: newUser.username } };
+    const history = { push: jest.fn() };
+    const fakeStore = mockStore({
+      user: {...userDefault},
+    });
+    const wrapper = mount(
+      <Provider store={fakeStore}>
+        <ConnectedLoginLayout history={history} />
+      </Provider>
+    );
+    const component = wrapper.find(LoginLayout);
+    component.instance().tokenOk(fakeData);
+    
+    const actions = fakeStore.getActions();
+    const expectedAction = { type: USER_SET, payload: newUser };
+    expect(actions).toEqual([expectedAction]);
+    expect(history.push.mock.calls.length).toBe(1);
+    expect(history.push.mock.calls[0][0]).toBe(ROUTE_ISSUES);
+  });
   
   describe('handleOnKeyUp():', () => {
     test('Should not change state if wrong key pressed or input is empty', () => {
@@ -61,9 +86,9 @@ describe('<LoginLayout />:', () => {
       const wrapperInput = wrapper.find('input');
 
       wrapperInput.simulate('keyUp', { key: 'a' });
-      expect(props.dispatchToken.mock.calls.length).toBe(0);
+      expect(props.setToken.mock.calls.length).toBe(0);
       wrapperInput.simulate('keyUp', { key: 'Enter' });
-      expect(props.dispatchToken.mock.calls.length).toBe(0);
+      expect(props.setToken.mock.calls.length).toBe(0);
       expect(wrapper.state().step).toBe('default');
       expect(wrapper.state().token).toBe('');
     });
@@ -73,11 +98,25 @@ describe('<LoginLayout />:', () => {
       const wrapperInput = wrapper.find('input');
 
       wrapperInput.simulate('keyUp', { key: 'a' });
-      expect(props.dispatchToken.mock.calls.length).toBe(0);
+      expect(props.setToken.mock.calls.length).toBe(0);
       wrapperInput.simulate('keyUp', { key: 'Enter' });
-      expect(props.dispatchToken.mock.calls.length).toBe(1);
+      expect(props.setToken.mock.calls.length).toBe(1);
       expect(wrapper.state().step).toBe('checking');
       expect(wrapper.state().token).toBe(props.initialToken);
+    });
+
+    test('Should escape and delete appropriately', () => {
+      const wrapper = mount(<LoginLayout {...props} store={store} />);
+      const wrapperInput = wrapper.find('input');
+
+      expect(wrapper.state().token).toBe(props.initialToken);
+      wrapperInput.simulate('keyUp', { key: 'Escape' });
+      expect(wrapper.state().token).toBe('');
+      wrapperInput.instance().value = 'thecat';
+      wrapperInput.simulate('change');
+      expect(wrapper.state().token).toBe('thecat');
+      wrapperInput.simulate('keyUp', { key: 'Delete' });
+      expect(wrapper.state().token).toBe('');
     });
   });
   

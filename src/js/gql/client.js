@@ -3,11 +3,9 @@
 import { ApolloClient, HttpLink, InMemoryCache } from 'apollo-boost';
 import { onError } from 'apollo-link-error';
 import { setContext } from 'apollo-link-context';
-import gql from 'graphql-tag';
-import { dispatch } from 'redux';
 import { GQL_ENDPOINT } from '../constants/gql';
 import { STORAGE_SSKEY } from '../constants/storage';
-import * as tokenActions from '../actions/tokenActions';
+import { delToken } from '../actions/tokenActions';
 import store from '../storage/store';
 
 
@@ -35,7 +33,7 @@ const withToken = setContext(async (_, { headers }) => {
   
   const resetToken = onError(({ response, networkError }) => {
     if (networkError && networkError.statusCode === 401) {
-      store.dispatch(tokenActions.del());
+      store.dispatch(delToken());
       networkError = undefined;
     }
   });

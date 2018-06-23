@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="%PUBLIC_URL%/css/app-shell.css">
 
     <script>
+      <!-- Translations only exist here, but n a real app they translations could be loaded via AJAX -->
       window.app = {
         translations: {
           EN: {
@@ -44,9 +45,26 @@
             "App": {
               "Name": "DE Github Issues:"
             },
-            "NotFound": {
+            "IssueList": {
+              "Empty": "DE No issues in repository"
+            },
+            "LoginLayout": {
+              "Checking": "DE Checking Access Token...",
+              "Default": "DE Enter a Github Access Token",
+              "Placeholder": "DE Access Token...",
+              "Error": "DE Token refused",
+              "WhatIsAToken": "DE Don't have a token or don't know what they are?"
+            },
+            "NotFoundLayout": {
               "Back": "DE Back to Github Issues",
               "Message": "DE Page or resource not found"
+            },
+            "SearchBar": {
+              "BtnLabel": "DE Search",
+              "Placeholder": "DE Search issues..."
+            },
+            "Validation": {
+              "TokenMatch": "DE Token must be alphanumerc and contain no whitespaces"
             }
           },
         },
