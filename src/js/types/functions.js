@@ -1,9 +1,10 @@
 // @flow
 
+import type { ActionCreator } from './action';
 
 /**
 * Function type defs.
 */
 
-export type DispatchType = (action: () => mixed) => void;
+export type DispatchType = (action: ActionCreator) => void;
 export type EventHandlerType = (event: SyntheticInputEvent<HTMLInputElement>) => void | boolean;

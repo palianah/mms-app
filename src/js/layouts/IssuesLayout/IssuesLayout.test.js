@@ -23,7 +23,7 @@ describe('<IssuesLayout />:', () => {
   });
 
   // Don't add any tests that use callCount before this one!
-  test('No redirect token NOT empty', () => {
+  test('Should not redirect if token is NOT empty', () => {
     const notEmptyStore = createMockStore(props);
     const wrapper = mount(
       <Provider store={notEmptyStore}>
@@ -33,7 +33,7 @@ describe('<IssuesLayout />:', () => {
     expect(history.push.mock.calls.length).toBe(callCount);
   });
 
-  test('Redirect to ROUTE_LOGIN if token empty', () => {
+  test('Should redirect to ROUTE_LOGIN if token empty', () => {
     const emptyStore = createMockStore({
       token: '',
     });

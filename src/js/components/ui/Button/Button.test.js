@@ -13,16 +13,6 @@ describe('<Button />:', () => {
     ReactDOM.render(<Button />, div);
   });
 
-  test('Handles disabled property', () => {
-    const props = {
-      onClick: jest.fn(),
-      disabled: true,
-    };
-    const wrapper = mount(<Button {...props} />);
-    wrapper.simulate('click')
-    expect(props.onClick.mock.calls.length).toBe(0);
-  });
-
   test('Handles busy property', () => {
     const props = {
       busy: true,

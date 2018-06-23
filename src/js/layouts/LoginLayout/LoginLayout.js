@@ -23,8 +23,7 @@ type Props = {
 };
 
 type State = {
-  checking: boolean,
-  submited: boolean,
+  step: 'default' | 'checking' | 'submitted',
   token: string,
 };
 
@@ -35,16 +34,15 @@ type State = {
 export class LoginLayout extends Component<Props, State> {
   props: Props;
   state: State;
-  handleOnChange: EventHandlerType
-  handleOnKeyUp: EventHandlerType
+  handleOnChange: EventHandlerType;
+  handleOnKeyUp: EventHandlerType;
 
   constructor(props: Props) {
     super(props);
 
     this.state = {
-      checking: false,
-      submitted: false,
-      token: this.props.initialToken,
+      step: 'default',
+      token: props.initialToken,
     };
 
     this.handleOnChange = this.handleOnChange.bind(this);
@@ -52,22 +50,21 @@ export class LoginLayout extends Component<Props, State> {
   }
 
   componentDidUpdate() {
-    if (this.state.submitted) {
+    if (this.state.step === 'submitted') {
       this.props.dispatchToken(this.state.token);
-      this.setState({ checking: true, submitted: false });
-    } else if (this.state.checking) {
+      this.setState({ step: 'checking' });
+    } else if (this.state.step === 'checking') {
       console.log('check');
     }
   }
 
   handleOnChange(event: SyntheticInputEvent<HTMLInputElement>) {
-    const newToken = event.currentTarget.value.replace(/ /g, '');
-    this.setState({ token: newToken });
+    this.setState({ token: event.currentTarget.value.replace(/ /g, '') });
   }
 
   handleOnKeyUp(event: SyntheticInputEvent<HTMLInputElement>) {
     if (event.key === 'Enter' && event.currentTarget.value.trim() !== '') {
-      this.setState({ submitted: true });
+      this.setState({ step: 'submitted' });
       //this.props.dispatchToken(this.state.token);
       //this.props.history.push(ROUTE_ISSUES);
     }
@@ -79,7 +76,7 @@ export class LoginLayout extends Component<Props, State> {
         <InfoMsg icon={ICON_LOGIN} msg={text('Access', 'LoginLayout')}>
           <FieldWrap>
             <TextInput 
-              disabled={this.state.submitted || this.state.checking}
+              disabled={this.state.step !== 'default'}
               onBlur={this.handleOnChange} 
               onChange={this.handleOnChange} 
               onKeyUp={this.handleOnKeyUp} 

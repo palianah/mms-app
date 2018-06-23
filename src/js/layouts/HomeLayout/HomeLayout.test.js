@@ -23,7 +23,7 @@ describe('<HomeLayout />:', () => {
     expect(wrapper).toHaveLength(1);
   });
 
-  test('Redirect to ROUTE_LOGIN if token empty', () => {
+  test('Should redirect to ROUTE_LOGIN if token empty', () => {
     const emptyStore = createMockStore({
       token: '',
     });
@@ -37,7 +37,7 @@ describe('<HomeLayout />:', () => {
     expect(history.push.mock.calls[callCount - 1][0]).toBe(ROUTE_LOGIN);
   });
 
-  test('Redirect to ROUTE_ISSUES if token NOT empty', () => {
+  test('Should redirect to ROUTE_ISSUES if token NOT empty', () => {
     const notEmptyStore = createMockStore(props);
     const wrapper = mount(
       <Provider store={notEmptyStore}>

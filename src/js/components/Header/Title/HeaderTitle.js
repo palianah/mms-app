@@ -1,6 +1,6 @@
 // @flow
 
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import Icon from '../../Icon/Icon';
 import { text } from '../../Translation/Translation';
 import './HeaderTitle.css';
@@ -15,7 +15,7 @@ type Props = {
 /**
 * App Header path showing breadcrumb on desktop.
 */
-export class HeaderTitle extends Component<Props> {
+export class HeaderTitle extends PureComponent<Props> {
   static defaultProps = {
     appName: '',
     icon: ICON_BRAND,
