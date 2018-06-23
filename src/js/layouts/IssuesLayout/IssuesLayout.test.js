@@ -5,7 +5,7 @@ import { Provider } from 'react-redux';
 import { mount, shallow, configure } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 import { createMockStore } from 'redux-test-utils';
-import store from '../../store/store';
+import store from '../../storage/store';
 import IssuesLayout from './IssuesLayout';
 import { ROUTE_LOGIN } from '../../constants/routes';
 import '../../components/Translation/testData';

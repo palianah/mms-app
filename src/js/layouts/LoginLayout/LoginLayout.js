@@ -26,7 +26,8 @@ type Props = {
 };
 
 type State = {
-  step: 'default' | 'checking' | 'submitted',
+  errMsg: string,
+  step: 'default' | 'checking' | 'submitted' | 'error',
   token: string,
 };
 
@@ -44,6 +45,7 @@ export class LoginLayout extends Component<Props, State> {
     super(props);
 
     this.state = {
+      errMsg: '',
       step: 'default',
       token: props.initialToken,
     };
@@ -64,32 +66,40 @@ export class LoginLayout extends Component<Props, State> {
   handleOnChange(event: SyntheticInputEvent<HTMLInputElement>) {
     try {
       let validToken = tokenSchema.validateSync(event.currentTarget.value);
-      this.setState({ token: validToken });
+      this.setState({ token: validToken, step: 'default' }); // Default in case an error occured
     } catch (error) {
       // Error doesn't need showing as any transforms have already been done by yup.
     }
   }
 
   handleOnKeyUp(event: SyntheticInputEvent<HTMLInputElement>) {
-    if (event.key === 'Enter' && event.currentTarget.value.trim() !== '') {
-      this.setState({ step: 'submitted' });
-      //this.props.history.push(ROUTE_ISSUES);
-    }
+    if (event.key === 'Enter' && event.currentTarget.value !== '') this.setState({ step: 'submitted' });
   }
 
   checkToken() {
-    gqlQuery(window.qlClient)
-      .then((response: mixed) => console.log(response))
-      .catch((error: mixed) => console.log(error));
+     gqlQuery(window.qlClient)
+      .then((response: mixed) => {
+        this.props.history.push(ROUTE_ISSUES);
+      })
+      .catch((error: Object) => {
+        this.setState({ 
+          step: 'error',
+          errMsg: error.toString(),
+        });
+      });
   }
 
   render() {
+    const isValid = this.state.step !== 'error' || false;
+    const disabled = this.state.step === 'checking' || this.state.step === 'submitted';
+
     return (
-      <section className="LoginLayout">
+      <section className="LoginLayout" data-step={this.state.step}>
         <InfoMsg icon={ICON_LOGIN} msg={text(ucFirst(this.state.step), 'LoginLayout')}>
           <FieldWrap>
             <TextInput 
-              disabled={this.state.step !== 'default'}
+              disabled={disabled}
+              isValid={isValid}
               onBlur={this.handleOnChange} 
               onChange={this.handleOnChange} 
               onKeyUp={this.handleOnKeyUp} 

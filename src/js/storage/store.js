@@ -10,10 +10,8 @@ import allReducers from '../reducers';
 import { STORAGE_SSKEY } from '../constants/storage';
 
 const reduxMiddleware = applyMiddleware(thunk);
-const sessionToken = sessionStorage.getItem(STORAGE_SSKEY);
-
-let initialState = {};
-if (sessionToken !== null) initialState.token = sessionToken;
+const token = sessionStorage.getItem(STORAGE_SSKEY) || '';
+let initialState = { token };
 
 const store = createStore(
   allReducers,

@@ -10,6 +10,9 @@
 	align-items: center;
 	padding: 10px 20px;
 }
+.LoginLayout[data-step="error"] .InfoMsg__msg {
+	color: var(--col-neg);
+}
 
 .LoginLayout .InfoMsg__sub .TextInput,
 .LoginLayout .InfoMsg__sub .Button {
