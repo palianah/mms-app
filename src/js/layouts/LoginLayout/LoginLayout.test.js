@@ -86,13 +86,13 @@ describe('<LoginLayout />:', () => {
       const wrapper = mount(<LoginLayout {...props} initialToken="" store={store} />);
       const wrapperInput = wrapper.find('input');
 
-      wrapperInput.instance().value = 'Test';
+      wrapperInput.instance().value = 'test';
       wrapperInput.simulate('change');
-      expect(wrapper.state().token).toBe('Test');
+      expect(wrapper.state().token).toBe('test');
       
       wrapperInput.instance().value = ' Test with whitespace ';
       wrapperInput.simulate('change');
-      expect(wrapper.state().token).toBe('Testwithwhitespace');
+      expect(wrapper.state().token).toBe('testwithwhitespace');
     });
   });
 });
