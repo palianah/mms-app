@@ -11,6 +11,9 @@ import { ICON_BUSY, ICON_LOGIN } from '../../constants/icons';
 import * as tokenActions from '../../actions/tokenActions';
 import { ROUTE_ISSUES } from '../../constants/routes';
 import type { DispatchType, EventHandlerType } from '../../types/functions';
+import tokenSchema from '../../validation/schemas/token';
+import gqlQuery from '../../gql/query';
+import { ucFirst } from '../../utils/strings';
 import './LoginLayout.css';
 
 type Props = {
@@ -54,26 +57,36 @@ export class LoginLayout extends Component<Props, State> {
       this.props.dispatchToken(this.state.token);
       this.setState({ step: 'checking' });
     } else if (this.state.step === 'checking') {
-      console.log('check');
+      this.checkToken();
     }
   }
 
   handleOnChange(event: SyntheticInputEvent<HTMLInputElement>) {
-    this.setState({ token: event.currentTarget.value.replace(/ /g, '') });
+    try {
+      let validToken = tokenSchema.validateSync(event.currentTarget.value);
+      this.setState({ token: validToken });
+    } catch (error) {
+      // Error doesn't need showing as any transforms have already been done by yup.
+    }
   }
 
   handleOnKeyUp(event: SyntheticInputEvent<HTMLInputElement>) {
     if (event.key === 'Enter' && event.currentTarget.value.trim() !== '') {
       this.setState({ step: 'submitted' });
-      //this.props.dispatchToken(this.state.token);
       //this.props.history.push(ROUTE_ISSUES);
     }
+  }
+
+  checkToken() {
+    gqlQuery(window.qlClient)
+      .then((response: mixed) => console.log(response))
+      .catch((error: mixed) => console.log(error));
   }
 
   render() {
     return (
       <section className="LoginLayout">
-        <InfoMsg icon={ICON_LOGIN} msg={text('Access', 'LoginLayout')}>
+        <InfoMsg icon={ICON_LOGIN} msg={text(ucFirst(this.state.step), 'LoginLayout')}>
           <FieldWrap>
             <TextInput 
               disabled={this.state.step !== 'default'}

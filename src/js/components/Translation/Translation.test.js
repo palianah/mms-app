@@ -4,7 +4,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { mount, shallow, configure } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
-import Translation from './Translation';
+import Translation, { t } from './Translation';
 import './testData';
 
 configure({ adapter: new Adapter() });
@@ -29,6 +29,11 @@ describe('<Translation />', () => {
     wrapper.instance().forceUpdate();
     expect(wrapper.text()).toBe(window.app.translations.DE.App.Name);
     window.app.curLang = 'EN';
+  });
+
+  test('Replaces placeholders', () => {
+    const wrapper = shallow(<Translation name='Placeholder' ns= 'App' placeholders={{ PH: 'Find me' }} />);
+    expect(wrapper.text()).toBe(window.app.translations.EN.App.Placeholder.replace('%PH%', 'Find me'));
   });
 
   describe('Handles window.app correctly', () => {
@@ -57,5 +62,37 @@ describe('<Translation />', () => {
       const wrapper = shallow(<Translation name="Wrong" ns="App" />);
       expect(wrapper.text()).toBe('?Wrong:App');
     });
+  });
+
+  describe('shouldComponentUpdate', () => {
+    const initialProps = { name: 'Name', ns: 'App'};
+    const wrapper = shallow(<Translation {...initialProps} />);
+    const wrapperInstance = wrapper.instance();
+
+    test('should not update if the props are the same', () => {
+      const shouldUpdate = wrapperInstance.shouldComponentUpdate({ name: 'Name', ns: 'App' });
+      expect(shouldUpdate).toBe(false);
+    });
+
+    test('should update if the props are different', () => {
+      const shouldUpdate1 = wrapperInstance.shouldComponentUpdate({ name: 'Placeholder', ns: 'App' });
+      const shouldUpdate2 = wrapperInstance.shouldComponentUpdate({ name: 'Placeholder', ns: 'NotFound' });
+      window.app.curLang = 'DE';
+      const shouldUpdate3 = wrapperInstance.shouldComponentUpdate({ name: 'Placeholder', ns: 'NotFound' });
+      window.app.curLang = 'EN';
+      expect(shouldUpdate1).toBe(true);
+      expect(shouldUpdate2).toBe(true);
+      expect(shouldUpdate3).toBe(true);
+    });
+  });
+
+  test('componentWillUpdate()', () => {
+    const wrapper = shallow(<Translation name="Name" ns="App" />);
+    const wrapperInstance = wrapper.instance();
+    expect(wrapperInstance.prevLang).toBe('EN');
+    window.app.curLang = 'DE';
+    wrapperInstance.componentWillUpdate();
+    expect(wrapperInstance.prevLang).toBe('DE');
+    window.app.curLang = 'EN';
   });
 });

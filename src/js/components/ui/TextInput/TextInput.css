@@ -2,7 +2,7 @@
 /* ------ */
 
 .TextInput {
-  background: var(--col-white);
+  background: var(--col-field-bg);
   color: var(--col-text);
   border: 1px solid var(--col-darken-3);
   border-radius: var(--border-radius);
@@ -35,6 +35,11 @@
 .TextInput.has--error:focus,
 .TextInput.has--error:active {
   border-color: var(--col-neg);
+  background: var(--col-field-bg-error);
+}
+
+.TextInput.has--error:focus {
+  box-shadow: var(--focus-error);
 }
 
 
