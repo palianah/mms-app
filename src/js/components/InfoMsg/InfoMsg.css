@@ -1,0 +1,55 @@
+/* Info Msg */
+/* -------- */
+
+.InfoMsg {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+    width: 100%;
+    height: 100%;
+    font-size: var(--font-size-huge);
+    color: var(--col-darken-3);
+}
+
+.InfoMsg .Icon {
+    font-size: 9.0rem;
+    margin-bottom: 10px;
+}
+
+.InfoMsg__msg,
+.InfoMsg__sub {
+    display: block;
+    text-align: center;
+    line-height: var(--lh-reduced);
+}
+
+.InfoMsg__sub {
+    font-size: var(--font-size);
+    margin-top: 10px;
+	max-width: 480px;
+	width: 100%;
+}
+
+.InfoMsg__sub p {
+    color: var(--col-darken-3);
+}
+
+
+/* Links */
+/* ----- */
+.InfoMsg__sub a {
+    color: var(--col-darken-5);
+    text-decoration: none;
+}
+
+.InfoMsg__sub a:focus,
+.InfoMsg__sub a:hover {
+    color: var(--col-brand);
+    text-decoration: none;
+}
+
+.InfoMsg__sub a:active {
+    color: var(--col-brand-dark);
+    text-decoration: none;
+}

@@ -1,0 +1,29 @@
+query {
+  repository(owner: "facebook", name: "react") {
+    id,
+    name,
+    owner {
+      id
+    },
+    name,
+    issues(last: 100, states:OPEN, orderBy: {field: UPDATED_AT, direction: DESC}) {
+      totalCount,
+      edges {
+        node {
+          id,
+          title,
+          author {
+            url,
+            avatarUrl
+        	},
+          participants(last: 10) {
+            totalCount
+          },
+          comments(last: 10) {
+            totalCount
+          }
+        }
+      }
+    }
+  }
+}

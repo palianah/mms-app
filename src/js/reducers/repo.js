@@ -12,11 +12,12 @@ import repoDefault from '../types/repo';
 /**
 * Repo Reducer.
 */
-export default function reducer(state: RepoType = repoDefault, action: ActionObj) {
+export default function reducer(state: RepoType = repoDefault, action: ActionObj): RepoType {
   switch (action.type) {
     case REPO_CHANGE:
-      if (action.payload !== undefined && action.payload.name && action.payload.owner) {
-        return { owner: action.payload.owner,  name: action.payload.name };
+      if (action.payload !== undefined) {
+        const { name, owner } = action.payload;
+        if (typeof name === 'string' && typeof owner === 'string') return { owner: owner,  name: name };
       }
       break;
 

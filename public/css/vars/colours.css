@@ -51,4 +51,8 @@
   --col-neg: #e84918;
   --col-neg-light: #f25626;
   --col-neg-dark: #db4011;
+
+  /* Primary, Secondary, Teriary  */
+  --col-primary: var(--col-brand);
+  --col-primary-light: #e52b2b;
 }

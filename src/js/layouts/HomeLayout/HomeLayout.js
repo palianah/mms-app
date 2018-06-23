@@ -1,11 +1,15 @@
 // @flow
 
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
-import setTitle from '../../utils/title';
+import { connect } from 'react-redux';
+import { ROUTE_ISSUES, ROUTE_LOGIN } from '../../constants/routes';
 import './HomeLayout.css';
 
 type Props = {
+  token: string,
+  history: Object,
+  location: Object,
+  match: Object,
 };
 
 
@@ -16,17 +20,23 @@ export class HomeLayout extends Component<Props> {
   props: Props;
 
   componentDidMount() {
-    setTitle('');
+    if (this.props.token !== '') {
+      this.props.history.push(ROUTE_ISSUES);
+    } else {
+      this.props.history.push(ROUTE_LOGIN);
+    }
   }
 
   render() {
-    return (
-      <div className="HomeLayout">
-        The home layout
-      </div>
-    )
+    return <section className="HomeLayout" />
   }
 }
 
+const mapStateToProps = (state: Object) => (
+  {
+    token: state.token,
+  }
+);
 
-export default HomeLayout;
+
+export default connect(mapStateToProps)(HomeLayout);

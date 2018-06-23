@@ -1,0 +1,64 @@
+/* Search Bar */
+/* ---------- */
+
+.SearchBar {
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	background: var(--col-darken-2);
+	border-bottom: var(--col-darken-1);
+	padding: 10px 20px;
+}
+	
+.SearchBar .Button,
+.SearchBar .TextInput {
+	max-width: 300px;
+	margin-left: auto;
+	margin-right: auto;
+}
+	
+.SearchBar .TextInput + .Button {
+	margin-top:
+}
+	
+.SearchBar .FieldWrap {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+
+.SearchBar__mobilebtlabel {
+	display: inline-block;
+	padding-left: 10px;
+}
+
+@media screen and (min-width: 1024px) {
+    .SearchBar {
+		flex-direction: row;
+		flex-wrap: nowrap;
+		height: var(--searchbar-height);
+		padding: 0px 20px;
+	}
+	
+    .SearchBar .FieldWrap {
+		flex-direction: row;
+		flex-wrap: nowrap;
+		width: auto;
+		margin: 0px 5px;
+    }
+	
+    .SearchBar .FieldWrap + .FieldWrap {
+		margin-top: 0px;
+    }
+	
+	.SearchBar .Button {
+		width: auto;
+	}
+
+	.SearchBar__mobilebtlabel {
+		display: none;	
+	}
+}

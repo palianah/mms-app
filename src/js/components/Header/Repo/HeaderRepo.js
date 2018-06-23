@@ -1,6 +1,6 @@
 // @flow
 
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import './HeaderRepo.css';
 
 type Props = {
@@ -11,13 +11,11 @@ type Props = {
 /**
 * Current repo name.
 */
-export class HeaderRepo extends Component<Props> {
+export class HeaderRepo extends PureComponent<Props> {
   props: Props;
 
   render() {
-    return (
-      <span className="HeaderRepo">{this.props.repoName}</span>
-    )
+    return <span className="HeaderRepo">{this.props.repoName}</span>
   }
 }
 

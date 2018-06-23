@@ -10,7 +10,7 @@ import '../Translation/testData';
 
 configure({ adapter: new Adapter() });
 
-describe('<Panels />', () => {
+describe('<Panels />:', () => {
   test('Renders without crashing', () => {
     const wrapper = shallow(<Provider store={store}><Panels /></Provider>);
     expect(wrapper).toHaveLength(1);
