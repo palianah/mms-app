@@ -31,11 +31,11 @@ export class Panels extends Component<Props> {
   render() {
     return (
       <div className="Panels">
-        {this.props.loggedin || window.location.pathname === ROUTE_LOGIN ? (
+        {this.props.loggedin ? (
           <Switch>
             <Route exact={true} path={ROUTE_HOME} component={HomeLayout} />
             <Route exact={true} path={ROUTE_LOGIN} component={LoginLayout} />
-            <Route path={ROUTE_ISSUES} component={IssuesLayout} />
+            <Route exact={true} path={ROUTE_ISSUES} component={IssuesLayout} />
             <Route component={NotFoundLayout} />
           </Switch>
         ) : (

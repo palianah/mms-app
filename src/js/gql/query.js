@@ -11,7 +11,7 @@ import { GQL_ENDPOINT } from '../constants/gql';
 * @return The response form the GQL Query.
 */
 const gqlQuery = async (queryStr: string, token: string) => {
-    const result = axios({
+    const result = await axios({
         method: 'post',
         url: GQL_ENDPOINT,
         data: {
@@ -21,7 +21,6 @@ const gqlQuery = async (queryStr: string, token: string) => {
             authorization: token ? `Bearer ${token}` : null,
         }
     });
-
     return result;
 }
 

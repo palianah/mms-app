@@ -11,16 +11,29 @@
     <link rel="shortcut icon" href="%PUBLIC_URL%/favicon.ico">
     <link rel="stylesheet" href="%PUBLIC_URL%/css/app-shell.css">
 
+    <!-- Translations only exist here, but n a real app they translations could be loaded via AJAX -->
     <script>
-      <!-- Translations only exist here, but n a real app they translations could be loaded via AJAX -->
       window.app = {
         translations: {
           EN: {
             "App": {
               "Name": "Github Issues:"
             },
+            "Avatar": {
+              "Alt": "Avatar"
+            },
+            "IssuesLayout": {
+              "ErrorFetching": "Error(s) occurred whilst fetching issues",
+              "Fetching": "Loading issues",
+              "Retry": "Retry loading"
+            },
             "IssueList": {
               "Empty": "No issues in repository"
+            },
+            "IssueListIssue": {
+              "Count": "Comments: %COUNT%",
+              "ParticipantCount": "Participants: %COUNT%",
+              "ViewProfile": "View author's profile (%NAME%)"
             },
             "LoginLayout": {
               "Checking": "Checking Access Token...",

@@ -1,0 +1,51 @@
+/* Issue List Issue  */
+/* ----------------- */
+
+.IssueListIssue {
+	position: relative;
+    display: block;
+    cursor: pointer;
+	margin: 0px;
+    padding: 12px 20px;
+    padding-left: 60px;
+    background: var(--col-list-item);
+    border-top: 1px solid var(--col-darken-1);
+}
+
+.IssueListIssue:focus,
+.IssueListIssue:hover {
+    background: var(--col-list-item-hover);
+}
+
+.IssueListIssue:active {
+    background: var(--col-list-item-active);
+}
+
+.IssueListIssue:first-child {
+    border-top: none;
+}
+
+.IssueListIssue__title {
+    position: relative;
+    padding-right: 20px;
+}
+
+.IssueListIssue__avatar {
+    position: absolute;
+    top: 50%;
+    left: 5px;
+    margin-top: -20px;
+}
+
+.IssueListIssue__commentcount {
+    position: relative;
+    color: var(--col-darken-3);
+    padding-right: 20px;
+}
+
+@media screen and (min-width: 1024px) {
+    .IssueListIssue {
+        padding: 10px 20px;
+        padding-left: 60px;
+    }
+}

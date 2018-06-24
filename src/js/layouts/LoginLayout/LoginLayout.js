@@ -6,7 +6,7 @@ import Icon from '../../components/Icon/Icon';
 import FieldWrap from '../../components/ui/FieldWrap/FieldWrap';
 import InfoMsg from '../../components/InfoMsg/InfoMsg';
 import TextInput from '../../components/ui/TextInput/TextInput';
-import Translate, { text } from '../../components/Translation/Translation';
+import Translation, { text } from '../../components/Translation/Translation';
 import { ICON_BUSY, ICON_LOGIN } from '../../constants/icons';
 import { loginUser } from '../../actions/userActions';
 import { ROUTE_ISSUES } from '../../constants/routes';
@@ -16,6 +16,7 @@ import tokenSchema from '../../validation/schemas/token';
 import gqlQuery from '../../gql/query';
 import userauthQuery from '../../gql/queries/userauth';
 import { ucFirst } from '../../utils/strings';
+import AppStorage from '../../storage/local';
 import { STORAGE_SSKEY } from '../../constants/storage';
 import './LoginLayout.css';
 
@@ -43,6 +44,7 @@ export class LoginLayout extends Component<Props, State> {
   state: State;
   handleOnChange: EventHandlerType;
   handleOnKeyUp: EventHandlerType;
+  tokenOk: Function;
 
   constructor(props: Props) {
     super(props);
@@ -55,6 +57,7 @@ export class LoginLayout extends Component<Props, State> {
 
     this.handleOnChange = this.handleOnChange.bind(this);
     this.handleOnKeyUp = this.handleOnKeyUp.bind(this);
+    this.tokenOk = this.tokenOk.bind(this);
   }
 
   componentDidUpdate() {
@@ -73,7 +76,7 @@ export class LoginLayout extends Component<Props, State> {
   handleOnKeyUp(event: SyntheticInputEvent<HTMLInputElement>) {
     if (event.currentTarget.value !== '') {
       if (event.key === 'Enter') {
-        sessionStorage.setItem(STORAGE_SSKEY, this.state.token);
+        AppStorage.set(STORAGE_SSKEY, this.state.token);
         this.setState({ token: this.state.token, step: 'checking' });
       } else if (event.key === 'Escape' || event.key === 'Delete') {
         this.setState({ token: '' });
@@ -82,7 +85,7 @@ export class LoginLayout extends Component<Props, State> {
   }
 
   checkToken() {
-     gqlQuery(userauthQuery, this.state.token)
+    gqlQuery(userauthQuery(), this.state.token)
       .then((response: Object) => {
         this.tokenOk(response.data.data);
       })
@@ -121,7 +124,7 @@ export class LoginLayout extends Component<Props, State> {
           </FieldWrap>
           <p>
             <a target="_blank" rel="noopener noreferrer" href="https://help.github.com/articles/creating-a-personal-access-token-for-the-command-line/">
-              <Translate name="WhatIsAToken" ns="LoginLayout" />
+              <Translation name="WhatIsAToken" ns="LoginLayout" />
             </a>
           </p>
         </InfoMsg>

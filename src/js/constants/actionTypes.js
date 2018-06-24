@@ -2,15 +2,17 @@
 * Action Type Constants
 */
 
+// Issues
+export const ISSUES_FETCH = 'ISSUES_FETCH';
+export const ISSUES_FETCH_ERROR = 'ISSUES_FETCH_ERROR';
+export const ISSUES_FETCH_SUCCESS = 'ISSUES_FETCH_SUCCESS';
+export const ISSUES_SEARCH = 'ISSUES_SEARCH';
+
 // Languages
 export const CHANGE_LANGUAGE = 'CHANGE_LANGUAGE';
 
 // Repo
 export const REPO_CHANGE = 'REPO_CHANGE';
-
-// Search
-export const SEARCH_CHANGE = 'SEARCH_CHANGE';
-export const SEARCH_ISSUES = 'SEARCH_ISSUES';
 
 // Token
 export const TOKEN_DEL = 'TOKEN_DEL';
