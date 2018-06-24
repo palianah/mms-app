@@ -9,8 +9,14 @@ import configureStore from 'redux-mock-store';
 import { createMockStore } from 'redux-test-utils';
 import store from '../../storage/store';
 import ConnectedLoginLayout, { LoginLayout } from './LoginLayout';
-import * as tokenActions from '../../actions/tokenActions';
-import { TOKEN_SET, USER_SET } from '../../constants/actionTypes';
+import {
+  loginUser,
+  logoutUser,
+} from '../../actions/userActions';
+import {
+  USER_LOGOUT,
+  USER_LOGIN,
+} from '../../constants/actionTypes';
 import userDefault from '../../types/user';
 import { ROUTE_ISSUES } from '../../constants/routes';
 import '../../components/Translation/testData';
@@ -27,9 +33,8 @@ describe('<LoginLayout />:', () => {
   };
   const props = {
     ...propsRouter,
-    dispatch: jest.fn(), 
-    setUser: jest.fn(), 
-    setToken: jest.fn(), 
+    dispatch: jest.fn(),
+    loginUser: jest.fn(),
     initialToken: 'letmein',
   };
 
@@ -38,32 +43,13 @@ describe('<LoginLayout />:', () => {
     expect(wrapper).toHaveLength(1);
   });
 
-  test('setToken() should call tokenActions.setToken() ', () => {
-    const newVal = 'newval';
-    const fakeStore = mockStore({
-      token: 'initval',
-    });
-    const wrapper = mount(
-      <Provider store={fakeStore}>
-        <ConnectedLoginLayout />
-      </Provider>
-    );
-    const wrapperInput = wrapper.find('input');
-    wrapperInput.instance().value = newVal;
-    wrapperInput.simulate('change');
-    wrapperInput.simulate('keyUp', { key: 'Enter' });
-
-    const actions = fakeStore.getActions();
-    const expectedAction = { type: TOKEN_SET, payload: { token: newVal } };
-    expect(actions).toEqual([expectedAction]);
-  });
-
   test('setUser() should call userActions.setUser() ', () => {
-    const newUser = {...userDefault, username: 'davelister' };
+    const initToken = 'letmein';
+    const newUser = {...userDefault, username: 'davelister', token: initToken };
     const fakeData = { viewer: { login: newUser.username } };
     const history = { push: jest.fn() };
     const fakeStore = mockStore({
-      user: {...userDefault},
+      user: {...userDefault, token: initToken},
     });
     const wrapper = mount(
       <Provider store={fakeStore}>
@@ -74,35 +60,29 @@ describe('<LoginLayout />:', () => {
     component.instance().tokenOk(fakeData);
     
     const actions = fakeStore.getActions();
-    const expectedAction = { type: USER_SET, payload: newUser };
+    const expectedAction = { type: USER_LOGIN, payload: newUser };
     expect(actions).toEqual([expectedAction]);
     expect(history.push.mock.calls.length).toBe(1);
     expect(history.push.mock.calls[0][0]).toBe(ROUTE_ISSUES);
   });
   
   describe('handleOnKeyUp():', () => {
-    test('Should not change state if wrong key pressed or input is empty', () => {
-      const wrapper = mount(<LoginLayout {...props} initialToken="" store={store} />);
-      const wrapperInput = wrapper.find('input');
-
-      wrapperInput.simulate('keyUp', { key: 'a' });
-      expect(props.setToken.mock.calls.length).toBe(0);
-      wrapperInput.simulate('keyUp', { key: 'Enter' });
-      expect(props.setToken.mock.calls.length).toBe(0);
-      expect(wrapper.state().step).toBe('default');
-      expect(wrapper.state().token).toBe('');
-    });
-
     test('Should change state if enter pressed & input is not empty', () => {
       const wrapper = mount(<LoginLayout {...props} store={store} />);
       const wrapperInput = wrapper.find('input');
 
-      wrapperInput.simulate('keyUp', { key: 'a' });
-      expect(props.setToken.mock.calls.length).toBe(0);
       wrapperInput.simulate('keyUp', { key: 'Enter' });
-      expect(props.setToken.mock.calls.length).toBe(1);
       expect(wrapper.state().step).toBe('checking');
       expect(wrapper.state().token).toBe(props.initialToken);
+    });
+
+    test('Should not change state if enter pressed & input is empty', () => {
+      const wrapper = mount(<LoginLayout {...props} initialToken="" store={store} />);
+      const wrapperInput = wrapper.find('input');
+
+      wrapperInput.simulate('keyUp', { key: 'Enter' });
+      expect(wrapper.state().step).toBe('default');
+      expect(wrapper.state().token).toBe('');
     });
 
     test('Should escape and delete appropriately', () => {

@@ -2,9 +2,8 @@
 
 import reducer from '../user';
 import {
-  TOKEN_DEL,
-  USER_DEL,
-  USER_SET,
+  USER_LOGOUT,
+  USER_LOGIN,
 } from '../../constants/actionTypes';
 import userDefault from '../../types/user';
 
@@ -20,22 +19,21 @@ describe('Reducer: User', () => {
     expect(reducer(INITIAL_STATE, { type: 'IGNORE'})).toEqual(INITIAL_STATE);
   });
 
-  test('Should update the user if payload exists', () => {
+  test('USER_LOGIN should set the user data if payload exists', () => {
     const payload = {...userDefault, username: 'arnoldrimmer', loggedin: true };
     const testAction = {
-      type: USER_SET,
+      type: USER_LOGIN,
       payload,
     };
     const noPayloadAction = {
-      type: USER_SET,
+      type: USER_LOGIN,
     };
     expect(reducer(INITIAL_STATE, testAction)).toEqual(payload);
     expect(reducer(INITIAL_STATE, noPayloadAction)).toEqual(INITIAL_STATE);
   });
 
-  test('Should delete the user', () => {
-    const DEL_INITIAL_STATE = {...INITIAL_STATE, username: 'davelister'};
-    expect(reducer(DEL_INITIAL_STATE, { type: TOKEN_DEL })).toEqual(INITIAL_STATE);
-    expect(reducer(DEL_INITIAL_STATE, { type: USER_DEL })).toEqual(INITIAL_STATE);
+  test('USER_LOGOUT should return remove all user data from the store', () => {
+    const DEL_INITIAL_STATE = {...INITIAL_STATE, loggedin: true, token: 'letmein', username: 'davelister' };
+    expect(reducer(DEL_INITIAL_STATE, { type: USER_LOGOUT })).toEqual(INITIAL_STATE);
   });
 });

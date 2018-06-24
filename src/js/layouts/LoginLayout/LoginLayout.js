@@ -8,22 +8,20 @@ import InfoMsg from '../../components/InfoMsg/InfoMsg';
 import TextInput from '../../components/ui/TextInput/TextInput';
 import Translate, { text } from '../../components/Translation/Translation';
 import { ICON_BUSY, ICON_LOGIN } from '../../constants/icons';
-import { setToken } from '../../actions/tokenActions';
-import { setUser } from '../../actions/userActions';
+import { loginUser } from '../../actions/userActions';
 import { ROUTE_ISSUES } from '../../constants/routes';
 import type { DispatchType, EventHandlerType } from '../../types/functions';
-import type { ApolloResponseType } from '../../types/apollo';
 import userDefault from '../../types/user';
 import tokenSchema from '../../validation/schemas/token';
 import gqlQuery from '../../gql/query';
 import userauthQuery from '../../gql/queries/userauth';
 import { ucFirst } from '../../utils/strings';
+import { STORAGE_SSKEY } from '../../constants/storage';
 import './LoginLayout.css';
 
 type Props = {
   dispatch: DispatchType,
-  setToken: Function,
-  setUser: Function,
+  loginUser: Function,
   history: Object,
   initialToken: string,
   location: Object,
@@ -32,7 +30,7 @@ type Props = {
 
 type State = {
   errMsg: string,
-  step: 'default' | 'checking' | 'submitted' | 'error',
+  step: 'default' | 'checking' | 'error',
   token: string,
 };
 
@@ -60,12 +58,7 @@ export class LoginLayout extends Component<Props, State> {
   }
 
   componentDidUpdate() {
-    if (this.state.step === 'submitted') {
-      this.props.setToken(this.state.token);
-      this.setState({ step: 'checking' });
-    } else if (this.state.step === 'checking') {
-      this.checkToken();
-    }
+    if (this.state.step === 'checking') this.checkToken();
   }
 
   handleOnChange(event: SyntheticInputEvent<HTMLInputElement>) {
@@ -80,7 +73,8 @@ export class LoginLayout extends Component<Props, State> {
   handleOnKeyUp(event: SyntheticInputEvent<HTMLInputElement>) {
     if (event.currentTarget.value !== '') {
       if (event.key === 'Enter') {
-        this.setState({ step: 'submitted' });
+        sessionStorage.setItem(STORAGE_SSKEY, this.state.token);
+        this.setState({ token: this.state.token, step: 'checking' });
       } else if (event.key === 'Escape' || event.key === 'Delete') {
         this.setState({ token: '' });
       }
@@ -88,9 +82,9 @@ export class LoginLayout extends Component<Props, State> {
   }
 
   checkToken() {
-     gqlQuery(window.qlClient, userauthQuery)
-      .then((response: ApolloResponseType) => {
-          this.tokenOk(response.data);
+     gqlQuery(userauthQuery, this.state.token)
+      .then((response: Object) => {
+        this.tokenOk(response.data.data);
       })
       .catch((error: Object) => {
         this.setState({ 
@@ -101,14 +95,14 @@ export class LoginLayout extends Component<Props, State> {
   }
 
   tokenOk(data: Object) {
-    const newUser = {...userDefault, username: data.viewer.login};
-    this.props.setUser(newUser);
+    const newUser = {...userDefault, username: data.viewer.login, token: this.state.token };
+    this.props.loginUser(newUser);
     this.props.history.push(ROUTE_ISSUES);
   }
 
   render() {
     const isValid = this.state.step !== 'error' || false;
-    const disabled = this.state.step === 'checking' || this.state.step === 'submitted';
+    const disabled = this.state.step === 'checking' || false;
 
     return (
       <section className="LoginLayout" data-step={this.state.step}>
@@ -138,9 +132,9 @@ export class LoginLayout extends Component<Props, State> {
 
 const mapStateToProps = (state: Object) => (
   {
-    initialToken: state.token,
+    initialToken: state.user.token,
   }
 );
 
 
-export default connect(mapStateToProps, { setToken, setUser })(LoginLayout);
+export default connect(mapStateToProps, { loginUser })(LoginLayout);

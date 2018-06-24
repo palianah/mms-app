@@ -1,8 +1,8 @@
 // @flow
 
 import {
-  USER_DEL,
-  USER_SET,
+  USER_LOGOUT,
+  USER_LOGIN,
 } from '../constants/actionTypes';
 import type { ActionCreator } from '../types/action';
 import type { UserType } from '../types/user';
@@ -12,15 +12,15 @@ import type { UserType } from '../types/user';
 * User Actions
 */
 
-export function setUser(user: UserType): ActionCreator {
+export function loginUser(user: UserType): ActionCreator {
   return {
-    type: USER_SET,
+    type: USER_LOGIN,
     payload: user,
   };
 }
 
-export function delUser(): ActionCreator {
+export function logoutUser(): ActionCreator {
   return {
-    type: USER_DEL
+    type: USER_LOGOUT
   };
 }

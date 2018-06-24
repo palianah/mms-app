@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
-/* import { Query } from 'react-apollo';
-import gql from 'graphql-tag'; */
 import Panels from '../Panels/Panels';
 import Header from '../Header/Header';
 import type { DispatchType } from '../../types/functions';
@@ -25,7 +23,7 @@ class App extends Component<Props> {
         <div className="App">
           <Header repoName={this.props.repoName} loggedin={this.props.loggedin} dispatch={this.props.dispatch} />
           <div className="App__content">
-            <Panels />
+            <Panels loggedin={this.props.loggedin} />
           </div>
         </div>
       </BrowserRouter>

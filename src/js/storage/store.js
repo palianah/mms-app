@@ -1,5 +1,7 @@
 // @flow
 
+import userDefault from '../types/user';
+
 /**
 * Store
 */
@@ -11,7 +13,7 @@ import { STORAGE_SSKEY } from '../constants/storage';
 
 const reduxMiddleware = applyMiddleware(thunk);
 const token = sessionStorage.getItem(STORAGE_SSKEY) || '';
-let initialState = { token };
+let initialState = { user: {...userDefault, token } };
 
 const store = createStore(
   allReducers,

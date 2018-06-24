@@ -19,4 +19,6 @@ export const TOKEN_SET = 'TOKEN_SET';
 
 // User
 export const USER_DEL = 'USER_DEL';
+export const USER_LOGIN = 'USER_LOGIN';
+export const USER_LOGOUT = 'USER_LOGOUT';
 export const USER_SET = 'USER_SET';

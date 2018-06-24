@@ -1,13 +1,13 @@
 // @flow
 
 import {
-  TOKEN_DEL,
-  USER_DEL,
-  USER_SET,
+  USER_LOGOUT,
+  USER_LOGIN,
 } from '../constants/actionTypes';
 import type { ActionObj } from '../types/action';
 import type { UserType } from '../types/user';
 import userDefault from '../types/user';
+import { STORAGE_SSKEY } from '../constants/storage';
 
 
 /**
@@ -15,12 +15,15 @@ import userDefault from '../types/user';
 */
 export default function reducer(state: UserType = userDefault, action: ActionObj): UserType {
   switch (action.type) {
-    case TOKEN_DEL:
-    case USER_DEL:
+    case USER_LOGOUT:
       return {...userDefault};
 
-    case USER_SET:
-      if (action.payload !== undefined) return {...action.payload, loggedin: true };
+    case USER_LOGIN:
+      if (action.payload !== undefined && typeof action.payload.token === 'string') {
+        sessionStorage.setItem(STORAGE_SSKEY, action.payload.token);
+        return {...action.payload, loggedin: true };
+      }
+
       break;
 
     default:

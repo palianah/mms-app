@@ -1,7 +1,13 @@
 // @flow
 
-import { setUser, delUser } from '../userActions';
-import { USER_DEL, USER_SET } from '../../constants/actionTypes';
+import {
+  loginUser,
+  logoutUser,
+} from '../userActions';
+import {
+  USER_LOGOUT,
+  USER_LOGIN,
+} from '../../constants/actionTypes';
 import userDefault from '../../types/user';
 
 
@@ -10,17 +16,17 @@ import userDefault from '../../types/user';
 */
 
 describe('Actions: userActions', () => {
-  test('USER_SET is handled correctly', () => {
+  test('USER_LOGIN is handled correctly', () => {
     const userData = {...userDefault, username: 'kryton' };
     const EXPECTED_ACTION = {
-      type: USER_SET,
+      type: USER_LOGIN,
       payload: userData,
     };
 
-    expect(setUser(userData)).toEqual(EXPECTED_ACTION);
+    expect(loginUser(userData)).toEqual(EXPECTED_ACTION);
   });
 
-  test('USER_DEL is handled correctly', () => {
-    expect(delUser()).toEqual({ type: USER_DEL });
+  test('USER_LOGOUT is handled correctly', () => {
+    expect(logoutUser()).toEqual({ type: USER_LOGOUT });
   });
 });

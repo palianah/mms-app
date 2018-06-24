@@ -1,6 +1,7 @@
 // @flow
 
-import gql from 'graphql-tag';
+import axios from 'axios';
+import { GQL_ENDPOINT } from '../constants/gql';
 
 
 /**
@@ -9,18 +10,19 @@ import gql from 'graphql-tag';
 * @param { object } gqlClient The instance of the GQL Client.
 * @return The response form the GQL Query.
 */
-const gqlQuery = async (gqlClient: any, queryStr: string) => {
-    const result = await gqlClient.query({
-         query: gql`
-            {
-                viewer { 
-                    login
-                }
-            }
-         `
-     });
+const gqlQuery = async (queryStr: string, token: string) => {
+    const result = axios({
+        method: 'post',
+        url: GQL_ENDPOINT,
+        data: {
+            query: queryStr,
+        },
+        headers: {
+            authorization: token ? `Bearer ${token}` : null,
+        }
+    });
 
-     return result;
+    return result;
 }
 
 export default gqlQuery;

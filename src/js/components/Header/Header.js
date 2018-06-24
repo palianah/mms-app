@@ -8,6 +8,7 @@ import {
   ROUTE_HOME,
 } from '../../constants/routes';
 import type { DispatchType, EventHandlerType } from '../../types/functions';
+import { logoutUser } from '../../actions/userActions';
 import './Header.css';
 
 type Props = {
@@ -31,7 +32,7 @@ export class Header extends Component<Props> {
   }
 
   handleLogout(event: SyntheticInputEvent<HTMLInputElement>) {
-    console.log('click');
+    this.props.dispatch(logoutUser());
   }
 
   render() {
