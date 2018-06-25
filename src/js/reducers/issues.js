@@ -39,10 +39,10 @@ export default function reducer(state: IssuesType = defaultIssues, action: Actio
 
     case ISSUES_FETCH_SUCCESS:
       if (action.payload !== undefined && action.payload.data !== undefined) {
-        if (action.payload.data.repository !== undefined && action.payload.data.repository.issues !== undefined) {
-          const { issues } = action.payload.data.repository;
-          if (Array.isArray(issues.edges)) {
-            return {...state, fetching: false, error: false, totalCount: issues.totalCount };
+        if (action.payload.data.search !== undefined && action.payload.data.search.edges !== undefined) {
+          const { edges, totalCount } = action.payload.data.search;
+          if (Array.isArray(edges)) {
+            return {...state, fetching: false, error: false, totalCount };
           }
         }
       }

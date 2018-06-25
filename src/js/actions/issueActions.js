@@ -1,6 +1,5 @@
 // @flow
 
-import issuesQuery from '../gql/queries/issues';
 import {
   ISSUES_FETCH,
   ISSUES_FETCH_ERROR,
@@ -8,6 +7,7 @@ import {
   ISSUES_FETCH_SUCCESS_CACHE,
   ISSUES_SEARCH,
 } from '../constants/actionTypes';
+import searchIssuesQuery from '../gql/queries/searchIssues';
 import type { IssuesType } from '../types/issues';
 import type { ActionCreator } from '../types/action';
 import AppStorage, { getQueryItemKey } from '../storage/appStorage';
@@ -35,19 +35,16 @@ export function fetchIssues(gqlQuery: Function, config: Object, issues: IssuesTy
 
     } else {
       const issuesQueryConfig = {
-        repoOwner: config.repoOwner,
+        last: config.perPage,
         repoName: config.repoName,
-        issues: {
-          last: config.perPage,
-          states: config.states,
-          ob: { 
-            field: config.sortField, 
-            dir: config.sort,
-          },
-        },
+        repoOwner: config.repoOwner,
+        sort: config.sort,
+        sortField: config.sortField, 
+        states: config.states,
+        term: config.term,
       };
 
-      return gqlQuery(issuesQuery(issuesQueryConfig), config.token)
+      return gqlQuery(searchIssuesQuery(issuesQueryConfig), config.token)
         .then((response: Object) => {
           if (response.data.errors !== undefined) {
             dispatch(fetchIssuesError(response.data.errors));

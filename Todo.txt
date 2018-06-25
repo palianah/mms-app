@@ -4,3 +4,6 @@
 * Build out apollo
 ** https://dev-blog.apollodata.com/4-simple-ways-to-call-a-graphql-api-a6807bcdb355
 * Fixed not found link to go back to issues???
+* Add validation to the search field
+* Fix tests
+* Add term to stroage key

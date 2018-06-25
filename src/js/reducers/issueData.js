@@ -37,15 +37,16 @@ export default function reducer(state: IssueDataType = issueDataDefault, action:
       break;
 
     case ISSUES_FETCH_SUCCESS:
+    console.log(action);
       if (action.payload !== undefined && action.payload.data !== undefined) {
-        if (action.payload.data.repository !== undefined && action.payload.data.repository.issues !== undefined) {
+        if (action.payload.data.search !== undefined && action.payload.data.search.edges !== undefined) {
           if (action.meta !== undefined && action.meta.issues !== undefined) {
-            const { issues } = action.payload.data.repository;
-            if (Array.isArray(issues.edges) && issues.edges.length > 0) {
+            const { edges } = action.payload.data.search;
+            if (Array.isArray(edges) && edges.length > 0) {
               const cacheKey = getQueryItemKey(action.meta.issues);
               if (state[cacheKey] === undefined) state[cacheKey] = [];
 
-              issues.edges.forEach(i => {
+              edges.forEach(i => {
                 if (i.node !== undefined && i.node.id !== undefined) {
                   const newIssue = { // Flatten data for easier cloning.
                     ...issueDefault,

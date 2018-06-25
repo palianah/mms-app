@@ -1,5 +1,7 @@
 // @flow
 
+import { GQL_ASC, GQL_DESC } from '../constants/gql';
+
 
 /**
 * Issues type def. (Info about issues - not the issues themselves)
@@ -10,23 +12,23 @@ export type IssuesType = {
   errorMsg: Array<string>,
   fetching: boolean,
   perPage: number,
-  sort: string,
+  sort: GQL_ASC | GQL_DESC,
   sortField: string,
   states: string,
   term: string,
   totalCount: number,
 };
 
-const IssuesDefault = {
+const issuesDefault = {
   error: false,
   errorMsg: [],
   fetching: false,
   perPage: 10,
-  sort: 'DESC',
-  sortField: 'UPDATED_AT',
-  states: 'OPEN',
+  sort: GQL_DESC,
+  sortField: 'created',
+  states: 'open',
   term: '',
   totalCount: 0,
 };
 
-export default IssuesDefault;
+export default issuesDefault;

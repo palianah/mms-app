@@ -47,6 +47,17 @@ export class IssuesLayout extends Component<Props> {
     this.makeRequest();
   }
 
+  componentDidUpdate(prevProps: Props) {
+    const curIssues = this.props.issues
+    const prevIssues = prevProps.issues
+
+    if (this.props.issues.fetching !== true) {
+      if (curIssues.sort !== prevIssues.sort || curIssues.term != prevIssues.term) {
+        this.makeRequest();
+      }
+    }
+  }
+
   makeRequest() {
     const {
       issues,
@@ -91,7 +102,17 @@ export class IssuesLayout extends Component<Props> {
   }
 
   renderFetching() {
-    return <InfoMsg icon={ICON_BUSY} msg={text('Fetching', 'IssuesLayout')} />
+    return (
+      <InfoMsg icon={ICON_BUSY} msg={text('Fetching', 'IssuesLayout')}>
+        <p>
+          <Translation name="Fetching_Repo" ns="IssuesLayout" /> <strong>{this.props.repoOwner}/{this.props.repoName}</strong>
+          <br />
+          <Translation name="Fetching_Sort" ns="IssuesLayout" /> <strong>{this.props.issues.sortField}/{this.props.issues.sort}</strong>
+          <br />
+          <Translation name="Fetching_Term" ns="IssuesLayout" /> <strong>{this.props.issues.term }</strong>
+        </p>
+      </InfoMsg>
+    )
   }
 
   renderIssuesList() {
@@ -110,7 +131,7 @@ export class IssuesLayout extends Component<Props> {
 
     return (
       <section className="IssuesLayout" data-error={error}>
-        <SearchBar />
+        <SearchBar fetching={fetching} />
         {ready && this.renderIssuesList()}
         {fetching && this.renderFetching()}
         {error && this.renderError()}
