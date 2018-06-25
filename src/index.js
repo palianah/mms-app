@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
-import store from './js/storage/store';
+import store from './js/storage/reduxStore';
 import App from './js/components/App/App';
 import './js/events/onlineStatus.js';
 import registerServiceWorker from './registerServiceWorker';

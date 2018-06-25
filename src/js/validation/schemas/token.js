@@ -9,7 +9,7 @@ yup.addMethod(yup.string, 'removeWhitespace', function() {
 });
 
 /**
-* Validation scheme for a github token.
+* Regex for a github token.
 * 
 * @return object
 */

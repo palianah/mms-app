@@ -6,7 +6,7 @@ import tokenSchema, { tokenMatch } from './token';
 * Token YUP Schema Tests
 */
 
-describe('Validation: YUP Schema', () => {
+describe('Validation: YUP Schema: Token', () => {
   test('tokenMatch should only contain lowercase letters and numers', () => {
     expect(tokenMatch.test('qwertz12345')).toBe(true);
     expect(tokenMatch.test(' qwertz12345 ')).toBe(false);

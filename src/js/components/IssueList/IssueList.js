@@ -3,7 +3,7 @@
 import React, { Component } from 'react';
 import InfoMsg from '../InfoMsg/InfoMsg';
 import IssueListIssue from './Issue/IssueListIssue';
-import { text } from '../../components/Translation/Translation';
+import Translation, { text } from '../../components/Translation/Translation';
 import type { IssueType } from '../../types/issue';
 import './IssueList.css';
 
@@ -30,7 +30,11 @@ export class IssueList extends Component<Props> {
   }
 
   renderEmpty() {
-    return <InfoMsg msg={text('Empty', 'IssueList')} />
+    return (
+      <InfoMsg msg={text('Empty', 'IssueList')}>
+        <p><Translation name="MaybeOffine" ns="IssueList" /></p>
+      </InfoMsg>
+    )
   }
 
   render() {

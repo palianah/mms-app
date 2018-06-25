@@ -1,5 +1,7 @@
 // @flow
 
+import type { IssueDataType } from '../../types/issueData';
+
 
 /**
 * Returns a copy of state with a new element added.

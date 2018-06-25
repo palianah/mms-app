@@ -6,6 +6,7 @@ import {
   ISSUES_FETCH,
   ISSUES_SEARCH,
 } from '../../constants/actionTypes';
+import { GQL_ASC } from '../../constants/gql';
 
 
 /**
@@ -27,9 +28,9 @@ describe('Reducer: Issues', () => {
   test('ISSUES_SEARCH should update the search term', () => {
     const testAction = {
       type: ISSUES_SEARCH,
-      payload: { term: 'Test' },
+      payload: { term: 'Test', sort: GQL_ASC },
     };
-    const EXPECTED_STATE = {...INITIAL_STATE, term: testAction.payload.term};
+    const EXPECTED_STATE = {...INITIAL_STATE, term: testAction.payload.term, sort: GQL_ASC};
     expect(reducer(INITIAL_STATE, testAction)).toEqual(EXPECTED_STATE);
   });
 

@@ -6,14 +6,19 @@ import {
   fetchIssues,
   fetchIssuesError,
   fetchIssuesSuccess,
+  fetchIssuesSuccessCache,
   searchIssues,
 } from '../issueActions';
 import {
   ISSUES_FETCH,
   ISSUES_FETCH_ERROR,
   ISSUES_FETCH_SUCCESS,
+  ISSUES_FETCH_SUCCESS_CACHE,
   ISSUES_SEARCH,
 } from '../../constants/actionTypes';
+import { GQL_ASC } from '../../constants/gql';
+import issuesDefault from '../../types/issues';
+
 const middlewares = [thunk]
 const mockStore = configureMockStore(middlewares);
 
@@ -33,13 +38,24 @@ describe('Actions: issueActions', () => {
     expect(fetchIssuesError({})).toEqual(EXPECTED_ACTION);
   });
 
+  test('fetchIssuesSuccessCache() returns the correct ISSUES_FETCH_SUCCESS_CACHE action', () => {
+    const EXPECTED_ACTION = {
+      type: ISSUES_FETCH_SUCCESS_CACHE,
+      payload: { data: [] },
+      meta: { issues: {...issuesDefault} },
+    };
+
+    expect(fetchIssuesSuccessCache([], {...issuesDefault})).toEqual(EXPECTED_ACTION);
+  });
+
   test('fetchIssuesSuccess() returns the correct ISSUES_FETCH_SUCCESS action', () => {
     const EXPECTED_ACTION = {
       type: ISSUES_FETCH_SUCCESS,
       payload: {},
+      meta: { issues: {...issuesDefault} },
     };
 
-    expect(fetchIssuesSuccess({})).toEqual(EXPECTED_ACTION);
+    expect(fetchIssuesSuccess({}, {...issuesDefault})).toEqual(EXPECTED_ACTION);
   });
 
     // Messy... refactor later if time!
@@ -78,11 +94,11 @@ describe('Actions: issueActions', () => {
     test('Dispatches on success ISSUES_FETCH && ISSUES_FETCH_SUCCESS actions', () => {
       const expectedActions = [
         { type: ISSUES_FETCH },
-        { type: ISSUES_FETCH_SUCCESS, payload: {} },
+        { type: ISSUES_FETCH_SUCCESS, payload: {}, meta: { issues: {...issuesDefault} } },
       ];
 
       expect.assertions(1);
-      store.dispatch(fetchIssues(mockGqlQuery, mockConfig)).then(() => {
+      store.dispatch(fetchIssues(mockGqlQuery, mockConfig, {...issuesDefault})).then(() => {
         expect(store.getActions()).toEqual(expectedActions);
         store.clearActions();
       })
@@ -95,7 +111,7 @@ describe('Actions: issueActions', () => {
       ];
 
       expect.assertions(1);
-      store.dispatch(fetchIssues(mockGqlQueryError, mockConfig)).then(() => {
+      store.dispatch(fetchIssues(mockGqlQueryError, mockConfig, {...issuesDefault})).then(() => {
         expect(store.getActions()).toEqual(expectedActions);
         store.clearActions();
       });
@@ -108,7 +124,7 @@ describe('Actions: issueActions', () => {
       ];
 
       expect.assertions(1);
-      store.dispatch(fetchIssues(mockGqlQueryErrorServer, mockConfig)).then(() => {
+      store.dispatch(fetchIssues(mockGqlQueryErrorServer, mockConfig, {...issuesDefault})).then(() => {
         expect(store.getActions()).toEqual(expectedActions);
         store.clearActions();
       });
@@ -120,9 +136,9 @@ describe('Actions: issueActions', () => {
     const searchTerm = 'Test';
     const EXPECTED_ACTION = {
       type: ISSUES_SEARCH,
-      payload: { term: searchTerm },
+      payload: { term: searchTerm, sort: GQL_ASC },
     };
 
-    expect(searchIssues(searchTerm)).toEqual(EXPECTED_ACTION);
+    expect(searchIssues(searchTerm, GQL_ASC)).toEqual(EXPECTED_ACTION);
   });
 });

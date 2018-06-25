@@ -1,7 +1,6 @@
 // @flow
 
-import store from '../storage/store';
-import { ONLINE_STATUS } from '../constants/actionTypes';
+import store from '../storage/reduxStore';
 import { setOnlineStatus } from '../actions/onlineActions';
 
 

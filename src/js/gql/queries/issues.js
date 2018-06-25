@@ -2,7 +2,7 @@
 
 
 /**
-* Graph QL query string to get comments.
+* Graph QL query string to get repo info.
 */
 
 const issuesQuery = (config: Object) => {

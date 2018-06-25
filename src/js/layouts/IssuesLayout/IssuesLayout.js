@@ -10,15 +10,17 @@ import { ICON_BUSY, ICON_ERROR } from '../../constants/icons';
 import type { DispatchType } from '../../types/functions';
 import type { IssuesType } from '../../types/issues';
 import type { IssueType } from '../../types/issue';
+import type { IssueDataType } from '../../types/issueData';
 import * as issueActions from '../../actions/issueActions';
 import gqlQuery from '../../gql/query';
 import Translation, { text } from '../../components/Translation/Translation';
+import { getQueryItemKey } from '../../storage/appStorage';
 import './IssuesLayout.css';
 
 type Props = {
   fetchIssues: Function,
   history: Object,
-  issueData: Array<IssueType>,
+  issueData: IssueDataType,
   issues: IssuesType,
   location: Object,
   match: Object,
@@ -45,6 +47,17 @@ export class IssuesLayout extends Component<Props> {
     this.makeRequest();
   }
 
+  componentDidUpdate(prevProps: Props) {
+    const curIssues = this.props.issues
+    const prevIssues = prevProps.issues
+
+    if (this.props.issues.fetching !== true) {
+      if (curIssues.sort !== prevIssues.sort || curIssues.term != prevIssues.term) {
+        this.makeRequest();
+      }
+    }
+  }
+
   makeRequest() {
     const {
       issues,
@@ -54,14 +67,15 @@ export class IssuesLayout extends Component<Props> {
     } = this.props;
 
     this.props.fetchIssues(gqlQuery, {
+      perPage: issues.perPage,
       repoName,
       repoOwner,
-      perPage: issues.perPage,
       sort: issues.sort,
       sortField: issues.sortField,
       states: issues.states,
+      term: issues.term,
       token,
-    });
+    }, issues);
   }
 
   getErrorKey(item: string) {
@@ -88,11 +102,27 @@ export class IssuesLayout extends Component<Props> {
   }
 
   renderFetching() {
-    return <InfoMsg icon={ICON_BUSY} msg={text('Fetching', 'IssuesLayout')} />
+    return (
+      <InfoMsg icon={ICON_BUSY} msg={text('Fetching', 'IssuesLayout')}>
+        <p>
+          <Translation name="Fetching_Repo" ns="IssuesLayout" /> <strong>{this.props.repoOwner}/{this.props.repoName}</strong>
+          <br />
+          <Translation name="Fetching_Sort" ns="IssuesLayout" /> <strong>{this.props.issues.sortField}/{this.props.issues.sort}</strong>
+          <br />
+          <Translation name="Fetching_Term" ns="IssuesLayout" /> <strong>{this.props.issues.term }</strong>
+        </p>
+      </InfoMsg>
+    )
   }
 
   renderIssuesList() {
-    return <IssueList history={this.props.history} issueCount={this.props.issues.totalCount} issues={this.props.issueData} />
+    const cacheKey = getQueryItemKey(this.props.issues);
+
+    return <IssueList 
+      history={this.props.history} 
+      issueCount={this.props.issues.totalCount} 
+      issues={this.props.issueData[cacheKey] ? this.props.issueData[cacheKey] : []}
+    />
   }
 
   render() {
@@ -101,7 +131,7 @@ export class IssuesLayout extends Component<Props> {
 
     return (
       <section className="IssuesLayout" data-error={error}>
-        <SearchBar />
+        <SearchBar fetching={fetching} />
         {ready && this.renderIssuesList()}
         {fetching && this.renderFetching()}
         {error && this.renderError()}
@@ -123,8 +153,8 @@ const mapStateToProps = (state: Object) => (
 
 const mapDispatchToProps = (dispatch: DispatchType) => {
   return {
-    fetchIssues: (gqlQuery: Function, config: Object) => {
-      dispatch(issueActions.fetchIssues(gqlQuery, config));
+    fetchIssues: (gqlQuery: Function, config: Object, issues: IssuesType) => {
+      dispatch(issueActions.fetchIssues(gqlQuery, config, issues));
     }
   }
 }
