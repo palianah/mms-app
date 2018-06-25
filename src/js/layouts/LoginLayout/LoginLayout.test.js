@@ -33,6 +33,7 @@ describe('<LoginLayout />:', () => {
   };
   const props = {
     ...propsRouter,
+    online: true,
     dispatch: jest.fn(),
     loginUser: jest.fn(),
     initialToken: 'letmein',

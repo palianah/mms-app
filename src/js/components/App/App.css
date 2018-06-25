@@ -18,3 +18,18 @@
   width: 100%;
   padding-top: var(--header-height);
 }
+
+.App__offline {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  background: var(--col-text);
+  color: var(--col-white);
+  box-shadow: 0px 0px 2px 2px var(--col-darken-2);
+  border: none;
+  display: inline-block;
+  margin: 0px;
+  padding: 5px 10px;
+  border-radius: var(--border-radius);
+  text-transform: uppercase;
+}

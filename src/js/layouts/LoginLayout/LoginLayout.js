@@ -8,6 +8,7 @@ import InfoMsg from '../../components/InfoMsg/InfoMsg';
 import TextInput from '../../components/ui/TextInput/TextInput';
 import Translation, { text } from '../../components/Translation/Translation';
 import { ICON_BUSY, ICON_LOGIN } from '../../constants/icons';
+import { DUMMY_USER } from '../../constants/misc';
 import { loginUser } from '../../actions/userActions';
 import { ROUTE_ISSUES } from '../../constants/routes';
 import type { DispatchType, EventHandlerType } from '../../types/functions';
@@ -22,6 +23,7 @@ import './LoginLayout.css';
 
 type Props = {
   dispatch: DispatchType,
+  online: boolean,
   loginUser: Function,
   history: Object,
   initialToken: string,
@@ -52,7 +54,7 @@ export class LoginLayout extends Component<Props, State> {
     this.state = {
       errMsg: '',
       step: 'default',
-      token: props.initialToken,
+      token: props.initialToken || AppStorage.get(STORAGE_SSKEY) || '',
     };
 
     this.handleOnChange = this.handleOnChange.bind(this);
@@ -85,7 +87,8 @@ export class LoginLayout extends Component<Props, State> {
   }
 
   checkToken() {
-    gqlQuery(userauthQuery(), this.state.token)
+    if (this.props.online) {
+      gqlQuery(userauthQuery(), this.state.token)
       .then((response: Object) => {
         this.tokenOk(response.data.data);
       })
@@ -95,6 +98,9 @@ export class LoginLayout extends Component<Props, State> {
           errMsg: error.toString(),
         });
       });
+    } else { // Let in with anything... when we come back on line the user will be logged out
+      this.tokenOk({ viewer: { login: DUMMY_USER }}); // TODO: Find a more elegant solution
+    }
   }
 
   tokenOk(data: Object) {
@@ -136,6 +142,7 @@ export class LoginLayout extends Component<Props, State> {
 const mapStateToProps = (state: Object) => (
   {
     initialToken: state.user.token,
+    online: state.online,
   }
 );
 

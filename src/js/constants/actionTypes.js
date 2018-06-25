@@ -2,6 +2,9 @@
 * Action Type Constants
 */
 
+// Actions 
+export const ONLINE_STATUS = 'ONLINE_STATUS';
+
 // Issues
 export const ISSUES_FETCH = 'ISSUES_FETCH';
 export const ISSUES_FETCH_ERROR = 'ISSUES_FETCH_ERROR';

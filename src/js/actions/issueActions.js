@@ -59,7 +59,6 @@ export function fetchIssuesError(payload: Object): ActionCreator {
   };
 }
 export function searchIssues(term: string): ActionCreator {
-  console.log('searchIssues ac');
   return {
     type: ISSUES_SEARCH,
     payload: { term },
