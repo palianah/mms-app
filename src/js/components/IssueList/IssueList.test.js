@@ -11,14 +11,20 @@ configure({ adapter: new Adapter() });
 
 describe('<IssueList />', () => {
   const props = {
+    hasNextPage: false,
     history: {},
     issueCount: 1,
     issues: [{...issueDefault}],
+    makeRequest: jest.fn(),
+    online: true,
   };
   const propsEmpty = {
+    hasNextPage: false,
     history: {},
     issueCount: 0,
     issues: [],
+    makeRequest: jest.fn(),
+    online: true,
   };
 
   test('Renders without crashing', () => {

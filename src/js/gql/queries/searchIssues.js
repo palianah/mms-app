@@ -7,7 +7,9 @@
 
 const searchIssuesQuery = (config: Object) => {
     const {
-        last,
+        endCursor,
+        hasNextPage,
+        perPage,
         repoName,
         repoOwner,
         sort,
@@ -16,10 +18,14 @@ const searchIssuesQuery = (config: Object) => {
         term,
     } = config;
 
+    let after = '';
+    if (hasNextPage && endCursor) after = 'after: ' + endCursor;
+
     return `
     {
         search(
-            last: ${last}, 
+            first: ${perPage}, 
+            ${after}, 
             type: ISSUE, 
             query: "
                 is:${states} 

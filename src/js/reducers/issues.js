@@ -40,9 +40,10 @@ export default function reducer(state: IssuesType = defaultIssues, action: Actio
     case ISSUES_FETCH_SUCCESS:
       if (action.payload !== undefined && action.payload.data !== undefined) {
         if (action.payload.data.search !== undefined && action.payload.data.search.edges !== undefined) {
-          const { edges, totalCount } = action.payload.data.search;
+          const { edges, issueCount } = action.payload.data.search;
+          const { endCursor, hasNextPage } = action.payload.data.search.pageInfo;
           if (Array.isArray(edges)) {
-            return {...state, fetching: false, error: false, totalCount };
+            return {...state, fetching: false, error: false, totalCount: issueCount, endCursor, hasNextPage };
           }
         }
       }
@@ -59,7 +60,7 @@ export default function reducer(state: IssuesType = defaultIssues, action: Actio
     case ISSUES_SEARCH:
       if (action.payload !== undefined) {
         const newProps = {};
-        if (typeof action.payload.term === 'string' ) newProps.term = action.payload.term;
+        if (typeof action.payload.term === 'string' ) newProps.term = action.payload.term.trim();
         if (action.payload.sort === GQL_ASC || action.payload.sort === GQL_DESC) newProps.sort = action.payload.sort;
         
         return {...state, ...newProps};

@@ -27,9 +27,20 @@
     border: 1px solid var(--col-darken-1);
 }
 
+.IssueList__paging {
+	padding: 20px;
+	visibility: hidden;
+}
+
+.IssueList__paging[data-visible="true"] {
+	display: block;
+	visibility: visible;
+}
+
 @media screen and (min-width: 1024px) {
 	.IssueList {
 		padding: 40px 0px;
+		padding: 0px;
 		font-size: var(--font-size);
 	}
 }

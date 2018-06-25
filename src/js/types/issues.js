@@ -8,9 +8,11 @@ import { GQL_ASC, GQL_DESC } from '../constants/gql';
 */
 
 export type IssuesType = {
+  endCursor: string,
   error: boolean,
   errorMsg: Array<string>,
   fetching: boolean,
+  hasNextPage: boolean,
   perPage: number,
   sort: GQL_ASC | GQL_DESC,
   sortField: string,
@@ -20,9 +22,11 @@ export type IssuesType = {
 };
 
 const issuesDefault = {
+  endCursor: '',
   error: false,
   errorMsg: [],
   fetching: false,
+  hasNextPage: false,
   perPage: 10,
   sort: GQL_DESC,
   sortField: 'created',

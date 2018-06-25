@@ -62,13 +62,14 @@ export class SearchBar extends Component<Props, State> {
 
   handleOnKeyUp(event: SyntheticInputEvent<HTMLInputElement>) {
     const { value } = event.currentTarget;
+    const { sort } = this.state;
 
     if (event.key === 'Enter') {
       this.validateSearch(value, () => {
-        this.submitSearch(value, this.state.sort);
+        this.submitSearch(value, sort);
       });
     } else if (event.key === 'Escape' || event.key === 'Delete') {
-      this.submitSearch('', this.state.sort);
+      this.setState({ term: '' }, () => {this.submitSearch('', sort)});
     }
   }
 

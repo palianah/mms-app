@@ -1,23 +1,27 @@
 // @flow
 
-import React, { Component } from 'react';
+import * as React from 'react';
 import InfoMsg from '../InfoMsg/InfoMsg';
 import IssueListIssue from './Issue/IssueListIssue';
+import Button from '../ui/Button/Button'
 import Translation, { text } from '../../components/Translation/Translation';
 import type { IssueType } from '../../types/issue';
 import './IssueList.css';
 
 type Props = {
+  hasNextPage: boolean,
   history: Object,
   issueCount: number,
   issues: Array<IssueType>,
+  makeRequest: Function,
+  online: boolean,
 };
 
 
 /**
 * IssueList Component to display a list of issues from the repo.
 */
-export class IssueList extends Component<Props> {
+export class IssueList extends React.Component<Props> {
   static defaultProps = {
     issues: [],
    };
@@ -43,9 +47,16 @@ export class IssueList extends Component<Props> {
         {this.props.issueCount < 1 ? (
           this.renderEmpty()
         ) : (
-          <ul className="IssueList__List">
-            {this.props.issues.map((issue: IssueType) => <IssueListIssue key={issue.id} issue={issue} history={this.props.history} />)}
-          </ul>
+          <React.Fragment>
+            <ul className="IssueList__List">
+              {this.props.issues.map((issue: IssueType) => <IssueListIssue key={issue.id} issue={issue} history={this.props.history} />)}
+            </ul>
+            <div className="IssueList__paging" data-visible={this.props.hasNextPage && this.props.online}>
+              <Button onClick={this.props.makeRequest} title={text('LoadMore', 'IssueList')}>
+                  <Translation name="LoadMore" ns="IssueList"/>
+              </Button>
+            </div>
+          </React.Fragment>
         )}
       </div>
     )
