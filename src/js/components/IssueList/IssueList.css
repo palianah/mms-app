@@ -8,5 +8,28 @@
 	align-items: center;
     width: 100%;
     height: 100%;
-    padding: 10px 20px;
+	padding: 0px;
+	transition: all 0.25s ease;
+	font-size: var(--font-size-small);
+}
+
+.IssueList__List {
+	position: relative;
+	display: block;
+	margin: 0px auto;
+	padding: 0px;
+	list-style: none;
+	max-width: 1000px;
+	width: 100%;
+}
+
+.IssueList__List:not(:empty) {
+    border: 1px solid var(--col-darken-1);
+}
+
+@media screen and (min-width: 1024px) {
+	.IssueList {
+		padding: 40px 0px;
+		font-size: var(--font-size);
+	}
 }

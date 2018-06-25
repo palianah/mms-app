@@ -18,12 +18,16 @@ describe('Reducer: Repo', () => {
     expect(reducer(INITIAL_STATE, { type: 'IGNORE'})).toEqual(INITIAL_STATE);
   });
 
-  test('Should update the repo data if all props exist', () => {
+  test('Should update the repo if payload exists', () => {
     const testAction = {
       type: REPO_CHANGE,
       payload: { owner: 'Test', name: 'Repo' },
     };
+    const noPayloadAction = {
+      type: REPO_CHANGE,
+    };
     expect(reducer(INITIAL_STATE, testAction)).toEqual(testAction.payload);
+    expect(reducer(INITIAL_STATE, noPayloadAction)).toEqual(INITIAL_STATE);
   });
 
   test('Should return existing state if the not all parts of the repo data exist', () => {

@@ -10,11 +10,16 @@
     height: 100%;
     font-size: var(--font-size-huge);
     color: var(--col-darken-3);
+    padding: 20px;
 }
 
 .InfoMsg .Icon {
     font-size: 9.0rem;
     margin-bottom: 10px;
+}
+
+.InfoMsg .icofont-refresh {
+    color: var(--col-darken-3);
 }
 
 .InfoMsg__msg,

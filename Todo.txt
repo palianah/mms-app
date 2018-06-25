@@ -1,2 +1,6 @@
 * Remove flow-typed/classnames
 * https://github.com/facebook/create-react-app/issues/1386
+* Test combined reducer
+* Build out apollo
+** https://dev-blog.apollodata.com/4-simple-ways-to-call-a-graphql-api-a6807bcdb355
+* Fixed not found link to go back to issues???

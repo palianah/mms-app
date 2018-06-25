@@ -2,10 +2,10 @@
 
 import React, { Component } from 'react';
 import { withRouter } from 'react-router';
-import { Route, Switch } from 'react-router-dom';
+import { Redirect, Route, Switch } from 'react-router-dom';
 import HomeLayout from '../../layouts/HomeLayout/HomeLayout';
 import IssuesLayout from '../../layouts/IssuesLayout/IssuesLayout';
-import LoginLayout from '../../layouts/LoginLayout/LoginLayout';
+import LoginLayout from '../../layouts/LoginLayout/LoginLayout'
 import NotFoundLayout from '../../layouts/NotFoundLayout/NotFoundLayout';
 import {
   ROUTE_HOME,
@@ -16,6 +16,7 @@ import './Panels.css';
 
 type Props = {
   history: Object,
+  loggedin: boolean,
   location: Object,
   match: Object,
 };
@@ -30,12 +31,19 @@ export class Panels extends Component<Props> {
   render() {
     return (
       <div className="Panels">
-        <Switch>
-          <Route exact={true} path={ROUTE_HOME} component={HomeLayout} />
-          <Route path={ROUTE_ISSUES} component={IssuesLayout} />
-          <Route path={ROUTE_LOGIN} component={LoginLayout} />
-          <Route component={NotFoundLayout} />
-        </Switch>
+        {this.props.loggedin ? (
+          <Switch>
+            <Route exact={true} path={ROUTE_HOME} component={HomeLayout} />
+            <Route exact={true} path={ROUTE_LOGIN} component={LoginLayout} />
+            <Route exact={true} path={ROUTE_ISSUES} component={IssuesLayout} />
+            <Route component={NotFoundLayout} />
+          </Switch>
+        ) : (
+          <Switch>
+            <Route exact={true} path={ROUTE_LOGIN} component={LoginLayout} />
+            <Redirect to={ROUTE_LOGIN} />
+          </Switch>
+        )}
       </div>
     )
   }

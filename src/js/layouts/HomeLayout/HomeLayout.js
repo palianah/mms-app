@@ -2,7 +2,6 @@
 
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { ROUTE_ISSUES, ROUTE_LOGIN } from '../../constants/routes';
 import './HomeLayout.css';
 
 type Props = {
@@ -18,15 +17,7 @@ type Props = {
 */
 export class HomeLayout extends Component<Props> {
   props: Props;
-
-  componentDidMount() {
-    if (this.props.token !== '') {
-      this.props.history.push(ROUTE_ISSUES);
-    } else {
-      this.props.history.push(ROUTE_LOGIN);
-    }
-  }
-
+  
   render() {
     return <section className="HomeLayout" />
   }

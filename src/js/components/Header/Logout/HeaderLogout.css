@@ -1,0 +1,18 @@
+/* Header Logout */
+/* ------------- */
+
+.HeaderLogout {
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  width: var(--header-height);
+  height: var(--header-height);
+  background: var(--col-darken-2);
+  color: var(--col-white);
+  border-left: 1px solid var(--col-darken-1);
+  font-size: var(--font-size-huge);
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}

@@ -20,4 +20,4 @@ export const tokenMatch = /^[a-z0-9]+$/;
 * 
 * @return object
 */
-export default yup.string().trim().lowercase().removeWhitespace().matches(tokenMatch);
+export default yup.string().trim().lowercase().removeWhitespace().matches(tokenMatch, { excludeEmptyString: true });

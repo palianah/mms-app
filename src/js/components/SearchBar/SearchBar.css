@@ -4,12 +4,15 @@
 .SearchBar {
 	width: 100%;
 	display: flex;
-	flex-direction: column;
+	flex-direction: row;
+	flex-wrap: nowrap;
 	justify-content: center;
 	align-items: center;
 	background: var(--col-darken-2);
 	border-bottom: var(--col-darken-1);
 	padding: 10px 20px;
+	height: var(--searchbar-height);
+	min-height: var(--searchbar-height);
 }
 	
 .SearchBar .Button,
@@ -17,17 +20,17 @@
 	max-width: 300px;
 	margin-left: auto;
 	margin-right: auto;
-}
-	
-.SearchBar .TextInput + .Button {
-	margin-top:
+	width: auto;
 }
 	
 .SearchBar .FieldWrap {
 	display: flex;
-	flex-direction: column;
+	flex-direction: row;
+	flex-wrap: nowrap;
 	justify-content: center;
 	align-items: center;
+	width: auto;
+	margin: 0px 5px;
 }
 
 .SearchBar__mobilebtlabel {
@@ -35,30 +38,16 @@
 	padding-left: 10px;
 }
 
+.SearchBar .FieldWrap + .FieldWrap {
+	margin-top: 0px;
+}
+
+.SearchBar__mobilebtlabel {
+	display: none;	
+}
+
 @media screen and (min-width: 1024px) {
     .SearchBar {
-		flex-direction: row;
-		flex-wrap: nowrap;
-		height: var(--searchbar-height);
 		padding: 0px 20px;
-	}
-	
-    .SearchBar .FieldWrap {
-		flex-direction: row;
-		flex-wrap: nowrap;
-		width: auto;
-		margin: 0px 5px;
-    }
-	
-    .SearchBar .FieldWrap + .FieldWrap {
-		margin-top: 0px;
-    }
-	
-	.SearchBar .Button {
-		width: auto;
-	}
-
-	.SearchBar__mobilebtlabel {
-		display: none;	
 	}
 }

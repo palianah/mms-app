@@ -10,3 +10,11 @@
 	align-items: center;
 	padding: 0px;
 }
+
+.IssuesLayout[data-error="true"] .InfoMsg__msg {
+	color: var(--col-neg);
+}
+
+.IssuesLayout[data-error="true"] .Button {
+	width: auto;
+}

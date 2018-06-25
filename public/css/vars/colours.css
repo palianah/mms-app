@@ -38,6 +38,9 @@
   --col-placeholder: var(--col-darken-4);
   --col-field-bg: var(--col-white);
   --col-field-bg-error: #fff5f4;
+  --col-list-item: rgba(0, 0, 0, 0.05);
+  --col-list-item-hover: rgba(0, 0, 0, 0.075);
+  --col-list-item-active: rgba(0, 0, 0, 0.1);
 
 
   /* Brand */

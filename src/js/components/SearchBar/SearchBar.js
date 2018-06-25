@@ -8,7 +8,7 @@ import FieldWrap from '../ui/FieldWrap/FieldWrap';
 import TextInput from '../ui/TextInput/TextInput';
 import Translation, { text } from '../Translation/Translation';
 import { ICON_SEARCH } from '../../constants/icons';
-import * as searchActions from '../../actions/searchActions';
+import { searchIssues } from '../../actions/issueActions';
 import type { DispatchType, EventHandlerType } from '../../types/functions';
 import './SearchBar.css';
 
@@ -82,10 +82,11 @@ const mapStateToProps = (state: Object) => (
     initialTerm: state.search,
   }
 );
+
 const mapDispatchToProps = (dispatch: DispatchType) => {
   return {
     searchIssues: (term: string) => {
-      dispatch(searchActions.search(term))
+      dispatch(searchIssues(term))
     }
   }
 }
