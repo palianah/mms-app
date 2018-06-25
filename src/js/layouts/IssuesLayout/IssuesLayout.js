@@ -10,15 +10,17 @@ import { ICON_BUSY, ICON_ERROR } from '../../constants/icons';
 import type { DispatchType } from '../../types/functions';
 import type { IssuesType } from '../../types/issues';
 import type { IssueType } from '../../types/issue';
+import type { IssueDataType } from '../../types/issueData';
 import * as issueActions from '../../actions/issueActions';
 import gqlQuery from '../../gql/query';
 import Translation, { text } from '../../components/Translation/Translation';
+import { getQueryItemKey } from '../../storage/appStorage';
 import './IssuesLayout.css';
 
 type Props = {
   fetchIssues: Function,
   history: Object,
-  issueData: Array<IssueType>,
+  issueData: IssueDataType,
   issues: IssuesType,
   location: Object,
   match: Object,
@@ -93,7 +95,13 @@ export class IssuesLayout extends Component<Props> {
   }
 
   renderIssuesList() {
-    return <IssueList history={this.props.history} issueCount={this.props.issues.totalCount} issues={this.props.issueData} />
+    const cacheKey = getQueryItemKey(this.props.issues);
+
+    return <IssueList 
+      history={this.props.history} 
+      issueCount={this.props.issues.totalCount} 
+      issues={this.props.issueData[cacheKey] ? this.props.issueData[cacheKey] : []}
+    />
   }
 
   render() {

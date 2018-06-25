@@ -94,7 +94,7 @@ describe('Actions: issueActions', () => {
     test('Dispatches on success ISSUES_FETCH && ISSUES_FETCH_SUCCESS actions', () => {
       const expectedActions = [
         { type: ISSUES_FETCH },
-        { type: ISSUES_FETCH_SUCCESS, payload: {} },
+        { type: ISSUES_FETCH_SUCCESS, payload: {}, meta: { issues: {...IssuesDefault} } },
       ];
 
       expect.assertions(1);

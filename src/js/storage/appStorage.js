@@ -78,16 +78,22 @@ const ISSUE_DATA_CACHE_DURATION = MS_IN_A_DAY * 2;
 
 /**
  * Adjusts the key suitable for storage.
+ * 
+ * @todo Remove special chars
  */
  export function fixKey(key: string): string {
-    return key.trim().toLowerCase().replace(/-/g, '_').replace(/ /g, '');
+    return key.trim()
+        .toLowerCase()
+        .replace(/-/g, '_')
+        .replace(/ /g, '');
  }
 
  /**
   * Makes a cache key for items from the repo.
   */
   export function getQueryItemKey(settings: IssuesType): string {
-    return `${ISSUE_DATA_KEY}_${settings.sort}_${settings.sortField}_${settings.term}_${settings.states}`;
+    let newKey = `${ISSUE_DATA_KEY}_${settings.sort}_${settings.sortField}_${settings.term}_${settings.states}`;
+    return fixKey(newKey);
   }
 
  export default AppStorage;
