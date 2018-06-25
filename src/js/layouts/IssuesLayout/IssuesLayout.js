@@ -54,14 +54,15 @@ export class IssuesLayout extends Component<Props> {
     } = this.props;
 
     this.props.fetchIssues(gqlQuery, {
+      perPage: issues.perPage,
       repoName,
       repoOwner,
-      perPage: issues.perPage,
       sort: issues.sort,
       sortField: issues.sortField,
       states: issues.states,
+      term: issues.term,
       token,
-    });
+    }, issues);
   }
 
   getErrorKey(item: string) {
@@ -123,8 +124,8 @@ const mapStateToProps = (state: Object) => (
 
 const mapDispatchToProps = (dispatch: DispatchType) => {
   return {
-    fetchIssues: (gqlQuery: Function, config: Object) => {
-      dispatch(issueActions.fetchIssues(gqlQuery, config));
+    fetchIssues: (gqlQuery: Function, config: Object, issues: IssuesType) => {
+      dispatch(issueActions.fetchIssues(gqlQuery, config, issues));
     }
   }
 }

@@ -17,7 +17,7 @@ import tokenSchema from '../../validation/schemas/token';
 import gqlQuery from '../../gql/query';
 import userauthQuery from '../../gql/queries/userauth';
 import { ucFirst } from '../../utils/strings';
-import AppStorage from '../../storage/local';
+import AppStorage from '../../storage/appStorage';
 import { STORAGE_SSKEY } from '../../constants/storage';
 import './LoginLayout.css';
 
@@ -118,6 +118,7 @@ export class LoginLayout extends Component<Props, State> {
         <InfoMsg icon={ICON_LOGIN} msg={text(ucFirst(this.state.step), 'LoginLayout')}>
           <FieldWrap>
             <TextInput 
+              autoFocus={true}
               disabled={disabled}
               isValid={isValid}
               onBlur={this.handleOnChange} 

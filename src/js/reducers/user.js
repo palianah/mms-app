@@ -7,7 +7,7 @@ import {
 import type { ActionObj } from '../types/action';
 import type { UserType } from '../types/user';
 import userDefault from '../types/user';
-import AppStorage from '../storage/local';
+import AppStorage from '../storage/appStorage';
 import { STORAGE_SSKEY } from '../constants/storage';
 
 
@@ -17,7 +17,6 @@ import { STORAGE_SSKEY } from '../constants/storage';
 export default function reducer(state: UserType = userDefault, action: ActionObj): UserType {
   switch (action.type) {
     case USER_LOGOUT:
-      //AppStorage.del(STORAGE_SSKEY);
       return {...userDefault};
 
     case USER_LOGIN:

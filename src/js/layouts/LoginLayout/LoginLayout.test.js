@@ -7,7 +7,7 @@ import { mount, shallow, configure } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 import configureStore from 'redux-mock-store';
 import { createMockStore } from 'redux-test-utils';
-import store from '../../storage/store';
+import store from '../../storage/reduxStore';
 import ConnectedLoginLayout, { LoginLayout } from './LoginLayout';
 import {
   loginUser,

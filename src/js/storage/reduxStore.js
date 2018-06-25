@@ -5,7 +5,7 @@ import thunk from 'redux-thunk';
 import allReducers from '../reducers';
 import checkOnlineStatus from '../middleware/checkOnlineStatus';
 import { STORAGE_SSKEY } from '../constants/storage';
-import AppStorage from './local';
+import AppStorage from './appStorage';
 import userDefault from '../types/user';
 
 

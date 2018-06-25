@@ -2,6 +2,7 @@
 
 import React, { PureComponent } from 'react';
 import Icon from '../../Icon/Icon';
+import { text } from '../../Translation/Translation';
 import { ICON_LOGOUT } from '../../../constants/icons';
 import './HeaderLogout.css';
 
@@ -18,7 +19,7 @@ export class HeaderLogout extends PureComponent<Props> {
 
   render() {
     return (
-      <span className="HeaderLogout" onClick={this.props.onClick}>
+      <span className="HeaderLogout" onClick={this.props.onClick} title={text('Logout', 'HeaderLogout')}>
         <Icon type={ICON_LOGOUT} />
       </span>
     )

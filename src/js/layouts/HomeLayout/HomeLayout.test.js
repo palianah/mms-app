@@ -6,7 +6,7 @@ import { MemoryRouter } from 'react-router';
 import { shallow, mount, configure } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 import { createMockStore } from 'redux-test-utils';
-import store from '../../storage/store';
+import store from '../../storage/reduxStore';
 import HomeLayout from './HomeLayout';
 import '../../components/Translation/testData';
 

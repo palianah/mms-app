@@ -33,17 +33,8 @@
 	margin: 0px 5px;
 }
 
-.SearchBar__mobilebtlabel {
-	display: inline-block;
-	padding-left: 10px;
-}
-
 .SearchBar .FieldWrap + .FieldWrap {
 	margin-top: 0px;
-}
-
-.SearchBar__mobilebtlabel {
-	display: none;	
 }
 
 @media screen and (min-width: 1024px) {

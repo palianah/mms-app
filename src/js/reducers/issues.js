@@ -4,9 +4,10 @@ import {
   ISSUES_FETCH,
   ISSUES_FETCH_ERROR,
   ISSUES_FETCH_SUCCESS,
+  ISSUES_FETCH_SUCCESS_CACHE,
   ISSUES_SEARCH,
 } from '../constants/actionTypes';
-
+import { GQL_ASC, GQL_DESC } from '../constants/gql';
 import type { ActionObj } from '../types/action';
 import type { IssuesType } from '../types/issues';
 import defaultIssues from '../types/issues';
@@ -47,9 +48,21 @@ export default function reducer(state: IssuesType = defaultIssues, action: Actio
       }
       break;
 
+    case ISSUES_FETCH_SUCCESS_CACHE:
+      if (action.payload !== undefined && action.payload.data !== undefined) {
+        if (Array.isArray(action.payload.data)) {
+          return {...state, fetching: false, error: false, totalCount: action.payload.data.length };
+        }
+      }
+      break;
+
     case ISSUES_SEARCH:
-      if (action.payload !== undefined && typeof action.payload.term === 'string') {
-        return {...state, term: action.payload.term }
+      if (action.payload !== undefined) {
+        const newProps = {};
+        if (typeof action.payload.term === 'string' ) newProps.term = action.payload.term;
+        if (action.payload.sort === GQL_ASC || action.payload.sort === GQL_DESC) newProps.sort = action.payload.sort;
+        
+        return {...state, ...newProps};
       }
       break;
 

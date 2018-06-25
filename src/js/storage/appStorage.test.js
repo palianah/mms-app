@@ -1,6 +1,6 @@
 // @flow
 
-import AppStorage, { fixKey } from './local';
+import AppStorage, { fixKey } from './appStorage';
 
 
 /**

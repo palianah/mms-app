@@ -5,7 +5,7 @@ import { Provider } from 'react-redux';
 import { shallow, configure } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 import SearchBar from './SearchBar';
-import store from '../../storage/store';
+import store from '../../storage/reduxStore';
 import '../Translation/testData';
 
 configure({ adapter: new Adapter() });
