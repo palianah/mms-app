@@ -1,6 +1,6 @@
 // @flow
 
-import React, { Component } from 'react';
+import * as React from 'react';
 import { connect } from 'react-redux';
 import IssueList from '../../components/IssueList/IssueList';
 import SearchBar from '../../components/SearchBar/SearchBar';
@@ -24,6 +24,7 @@ type Props = {
   issues: IssuesType,
   location: Object,
   match: Object,
+  online: boolean,
   repoName: string,
   repoOwner: string,
   token: string,
@@ -33,7 +34,7 @@ type Props = {
 /**
 * Issues Layout for dislaying the list of issues.
 */
-export class IssuesLayout extends Component<Props> {
+export class IssuesLayout extends React.Component<Props> {
   props: Props;
   makeRequest: Function;
 
@@ -70,6 +71,8 @@ export class IssuesLayout extends Component<Props> {
       perPage: issues.perPage,
       repoName,
       repoOwner,
+      hasNextPage: issues.hasNextPage,
+      endCursor: issues.endCursor,
       sort: issues.sort,
       sortField: issues.sortField,
       states: issues.states,
@@ -118,11 +121,25 @@ export class IssuesLayout extends Component<Props> {
   renderIssuesList() {
     const cacheKey = getQueryItemKey(this.props.issues);
 
-    return <IssueList 
-      history={this.props.history} 
-      issueCount={this.props.issues.totalCount} 
-      issues={this.props.issueData[cacheKey] ? this.props.issueData[cacheKey] : []}
-    />
+    return (
+      <React.Fragment>
+        {this.props.issues.totalCount > 0 && (
+          <p className="IssuesLayout__count">
+            <strong>{this.props.issues.totalCount}</strong> 
+            <Translation name="Match" ns="IssuesLayout" />
+            <strong>{this.props.repoOwner}/{this.props.repoName}</strong>
+          </p>
+        )}
+        <IssueList 
+          hasNextPage={this.props.issues.hasNextPage} 
+          history={this.props.history} 
+          issueCount={this.props.issues.totalCount} 
+          issues={this.props.issueData[cacheKey] ? this.props.issueData[cacheKey] : []}
+          makeRequest={this.makeRequest} 
+          online={this.props.online}
+        />
+      </React.Fragment>
+    )
   }
 
   render() {
@@ -143,11 +160,12 @@ export class IssuesLayout extends Component<Props> {
 
 const mapStateToProps = (state: Object) => (
   {
-    repoOwner: state.repo.owner,
-    repoName: state.repo.name,
-    token: state.user.token,
-    issues: state.issues,
     issueData: state.issueData,
+    issues: state.issues,
+    online: state.online,
+    repoName: state.repo.name,
+    repoOwner: state.repo.owner,
+    token: state.user.token,
   }
 );
 

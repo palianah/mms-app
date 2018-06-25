@@ -8,10 +8,9 @@ yup.addMethod(yup.string, 'sanitizesearch', function() {
     })
 });
 
-
 /**
 * Validation scheme for a the search term.
 * 
 * @return object
 */
-export default yup.string().trim().sanitizesearch();
+export default yup.string().sanitizesearch();

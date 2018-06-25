@@ -35,3 +35,36 @@ query {
     }
   }
 }
+
+
+
+{
+  search(first: 10, type: ISSUE, query: "is:open is:issue org:facebook repo:react sort:created-asc") {
+    issueCount
+    pageInfo {
+      hasNextPage
+      endCursor
+    }
+    edges {
+      node {
+        ... on Issue {
+          createdAt
+          title
+          url
+          id
+          author {
+            url
+            avatarUrl
+            login
+          }
+          participants(last: 10) {
+            totalCount
+          }
+          comments(last: 10) {
+            totalCount
+          }
+        }
+      }
+    }
+  }
+}

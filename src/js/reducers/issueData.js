@@ -37,7 +37,6 @@ export default function reducer(state: IssueDataType = issueDataDefault, action:
       break;
 
     case ISSUES_FETCH_SUCCESS:
-    console.log(action);
       if (action.payload !== undefined && action.payload.data !== undefined) {
         if (action.payload.data.search !== undefined && action.payload.data.search.edges !== undefined) {
           if (action.meta !== undefined && action.meta.issues !== undefined) {

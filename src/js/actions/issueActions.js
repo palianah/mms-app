@@ -35,7 +35,9 @@ export function fetchIssues(gqlQuery: Function, config: Object, issues: IssuesTy
 
     } else {
       const issuesQueryConfig = {
-        last: config.perPage,
+        endCursor: config.endCursor,
+        hasNextPage: config.hasNextPage,
+        perPage: config.perPage,
         repoName: config.repoName,
         repoOwner: config.repoOwner,
         sort: config.sort,
