@@ -60,8 +60,15 @@ export default function reducer(state: IssuesType = defaultIssues, action: Actio
     case ISSUES_SEARCH:
       if (action.payload !== undefined) {
         const newProps = {};
+        const oldTerm = state.term;
+        const oldSort = state.sort;
         if (typeof action.payload.term === 'string' ) newProps.term = action.payload.term.trim();
         if (action.payload.sort === GQL_ASC || action.payload.sort === GQL_DESC) newProps.sort = action.payload.sort;
+        
+        if (oldSort !== newProps.sort || oldTerm !== newProps.term) {
+          newProps.endCursor = '';
+          newProps.hasNextPage = false;
+        }
         
         return {...state, ...newProps};
       }

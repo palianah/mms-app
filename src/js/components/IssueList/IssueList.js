@@ -51,7 +51,7 @@ export class IssueList extends React.Component<Props> {
             <ul className="IssueList__List">
               {this.props.issues.map((issue: IssueType) => <IssueListIssue key={issue.id} issue={issue} history={this.props.history} />)}
             </ul>
-            <div className="IssueList__paging" data-visible={this.props.hasNextPage && this.props.online}>
+            <div className="IssueList__paging" data-visible={this.props.online && this.props.hasNextPage}>
               <Button onClick={this.props.makeRequest} title={text('LoadMore', 'IssueList')}>
                   <Translation name="LoadMore" ns="IssueList"/>
               </Button>
