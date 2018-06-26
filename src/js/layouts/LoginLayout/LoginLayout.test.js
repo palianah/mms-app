@@ -23,7 +23,7 @@ import '../../components/Translation/testData';
 
 configure({ adapter: new Adapter() });
 
-describe('<LoginLayout />:', () => {
+describe('<LoginLayout />', () => {
   const middlewares = [];
   const mockStore = configureStore(middlewares);
   const propsRouter = { 

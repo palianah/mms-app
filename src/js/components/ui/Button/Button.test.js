@@ -7,7 +7,7 @@ import { UI_ERROR_CLASS } from '../../../constants/ui';
 
 configure({ adapter: new Adapter() });
 
-describe('<Button />:', () => {
+describe('<Button />', () => {
   test('Renders without crashing', () => {
     const div = document.createElement('div');
     ReactDOM.render(<Button />, div);

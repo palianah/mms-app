@@ -18,8 +18,7 @@ const searchIssuesQuery = (config: Object) => {
         term,
     } = config;
 
-    let after = '';
-    if (hasNextPage && endCursor) after = 'after: ' + endCursor;
+    const after = (endCursor) ? 'after: ' + endCursor : '';
 
     return `
     {

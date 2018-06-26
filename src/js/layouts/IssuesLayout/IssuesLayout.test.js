@@ -12,7 +12,7 @@ import '../../components/Translation/testData';
 
 configure({ adapter: new Adapter() });
 
-describe('<IssuesLayout />:', () => {
+describe('<IssuesLayout />', () => {
   const props = { loggedin: true };
   const history = { push: jest.fn() };
   let callCount = 0;

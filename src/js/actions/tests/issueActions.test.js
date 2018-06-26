@@ -32,10 +32,10 @@ describe('Actions: issueActions', () => {
     const EXPECTED_ACTION = {
       type: ISSUES_FETCH_ERROR,
       error: true,
-      payload: {},
+      payload: { errors: [] },
     };
 
-    expect(fetchIssuesError({})).toEqual(EXPECTED_ACTION);
+    expect(fetchIssuesError({ errors: [] })).toEqual(EXPECTED_ACTION);
   });
 
   test('fetchIssuesSuccessCache() returns the correct ISSUES_FETCH_SUCCESS_CACHE action', () => {
@@ -107,7 +107,7 @@ describe('Actions: issueActions', () => {
     test('Dispatches on errors ISSUES_FETCH && ISSUES_FETCH_ERROR actions', () => {
       const expectedActions = [
         { type: ISSUES_FETCH },
-        { type: ISSUES_FETCH_ERROR, payload: {}, error: true },
+        { type: ISSUES_FETCH_ERROR, payload: { errors: [] }, error: true },
       ];
 
       expect.assertions(1);
@@ -115,20 +115,6 @@ describe('Actions: issueActions', () => {
         expect(store.getActions()).toEqual(expectedActions);
         store.clearActions();
       });
-    });
-
-    test('Dispatches on serverside errors ISSUES_FETCH && ISSUES_FETCH_ERROR actions', () => {
-      const expectedActions = [
-        { type: ISSUES_FETCH },
-        { type: ISSUES_FETCH_ERROR, payload: {}, error: true },
-      ];
-
-      expect.assertions(1);
-      store.dispatch(fetchIssues(mockGqlQueryErrorServer, mockConfig, {...issuesDefault})).then(() => {
-        expect(store.getActions()).toEqual(expectedActions);
-        store.clearActions();
-      });
-
     });
   });
 

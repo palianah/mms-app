@@ -12,7 +12,7 @@ import '../../components/Translation/testData';
 
 configure({ adapter: new Adapter() });
 
-describe('<HomeLayout />:', () => {
+describe('<HomeLayout />', () => {
   const props = { token: 'letmein' };
   const history = { push: jest.fn() };
   let callCount = 0;

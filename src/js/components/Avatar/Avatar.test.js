@@ -8,7 +8,7 @@ import '../Translation/testData';
 
 configure({ adapter: new Adapter() });
 
-describe('<Avatar />:', () => {
+describe('<Avatar />', () => {
   const props = {
     src: 'test.png',
     online: true,

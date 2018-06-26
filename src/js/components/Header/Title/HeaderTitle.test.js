@@ -8,7 +8,7 @@ import '../../Translation/testData';
 
 configure({ adapter: new Adapter() });
 
-describe('<HeaderTitle />:', () => {
+describe('<HeaderTitle />', () => {
   test('Renders without crashing', () => {
     const wrapper = shallow(<HeaderTitle />);
     expect(wrapper).toHaveLength(1);

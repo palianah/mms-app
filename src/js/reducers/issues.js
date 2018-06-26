@@ -28,17 +28,8 @@ export default function reducer(state: IssuesType = issuesDefault, action: Actio
       return {...state, fetching: true, error: false };
 
     case ISSUES_FETCH_ERROR:
-      if (action.payload !== undefined) {
-        let errorMsg = [];
-
-        if (action.payload.message !== undefined) { // Network error (Axios Error)
-          errorMsg.push(action.payload.message);
-        } else { // Server side error (Github API Error)
-          action.payload.forEach(element => {
-            errorMsg.push(element.message);
-          });
-        }
-
+      if (action.payload !== undefined && action.payload.errors !== undefined) {
+        const errorMsg = (action.payload.errors) ? action.payload.errors : [];
         return {...state, fetching: false, error: true, errorMsg };
       }
       break;

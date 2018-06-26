@@ -49,13 +49,14 @@ export function fetchIssues(gqlQuery: Function, config: Object, issues: IssuesTy
       return gqlQuery(searchIssuesQuery(issuesQueryConfig), config.token)
         .then((response: Object) => {
           if (response.data.errors !== undefined) {
-            dispatch(fetchIssuesError(response.data.errors));
+            dispatch(fetchIssuesError({ errors: [...response.data.errors] }));
           } else {
             dispatch(fetchIssuesSuccess(response.data, issues));
           }
         })
         .catch((error: Object) => {
-          dispatch(fetchIssuesError(error));
+          const errors = (error.message) ? [error.message] : []; 
+          dispatch(fetchIssuesError({ errors }));
         });
     }
   };
@@ -70,10 +71,11 @@ export function fetchIssuesSuccess(payload: Object, issues: IssuesType): ActionC
 }
 
 export function fetchIssuesError(payload: Object): ActionCreator {
+  const pl = (payload.errors === undefined) ? {...payload, errors: []} : {...payload};
   return {
     type: ISSUES_FETCH_ERROR,
     error: true,
-    payload,
+    payload: pl,
   };
 }
 

@@ -9,7 +9,7 @@ import '../../components/Translation/testData';
 configure({ adapter: new Adapter() });
 
 
-describe('<NotFoundLayout />:', () => {
+describe('<NotFoundLayout />', () => {
   test('Renders without crashing', () => {
     const wrapper = shallow(<NotFoundLayout />);
     expect(wrapper).toHaveLength(1);
