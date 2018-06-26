@@ -11,7 +11,7 @@ import './IssueList.css';
 type Props = {
   hasNextPage: boolean,
   history: Object,
-  issueCount: number,
+  issueCount: number, // Matching count
   issues: Array<IssueType>,
   makeRequest: Function,
   online: boolean,
@@ -49,7 +49,9 @@ export class IssueList extends React.Component<Props> {
         ) : (
           <React.Fragment>
             <ul className="IssueList__List">
-              {this.props.issues.map((issue: IssueType) => <IssueListIssue key={issue.id} issue={issue} history={this.props.history} />)}
+              {this.props.issues.map((issue: IssueType) => (
+                <IssueListIssue key={issue.id} issue={issue} history={this.props.history} online={this.props.online} />
+              ))}
             </ul>
             <div className="IssueList__paging" data-visible={this.props.online && this.props.hasNextPage}>
               <Button onClick={this.props.makeRequest} title={text('LoadMore', 'IssueList')}>

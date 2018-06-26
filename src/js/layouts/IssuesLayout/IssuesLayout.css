@@ -19,23 +19,9 @@
 	width: auto;
 }
 
-.IssuesLayout__count {
-	margin: 0px auto;
-	padding: 15px 20px 15px 20px;
-	position: relative;
-	text-transform: uppercase;
-	color: var(--col-darken-4);
-	text-align: center;
-	line-height: var(--lh-reduced);
-}
-
-.IssuesLayout__count strong {
-	display: inline-block;
-	padding: 0px 8px;
-}
-
-@media screen and (min-width: 1024px) {
-	.IssuesLayout__count {
-		padding: 17px 20px 17px 20px;
-	}
+.IssuesLayout > .InfoMsg {
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	width: 100%;
 }

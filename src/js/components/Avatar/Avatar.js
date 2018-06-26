@@ -8,6 +8,7 @@ import './Avatar.css';
 
 type Props = {
   src: string,
+  online: boolean,
 };
 
 
@@ -17,14 +18,28 @@ type Props = {
 export class Avatar extends Component<Props> {
   props: Props;
 
+  renderImg() {
+    return <img src={this.props.src} alt={text('Alt', 'Avatar')} />
+  }
+
+  renderObserver() {
+    return (
+      <Observer
+        render={({ inView, ref }) => (
+          <img ref={ref} src={this.props.src} alt={text('Alt', 'Avatar')} />
+        )}
+      />
+    )
+  }
+
   render() {
     return (
       <span className="Avatar">
-        <Observer
-          render={({ inView, ref }) => (
-            <img ref={ref} src={this.props.src} alt={text('Alt', 'Avatar')} />
-          )}
-        />
+        {this.props.online ? (
+          this.renderObserver()
+        ) : (
+          this.renderImg()
+        )}
       </span>
     )
   }

@@ -12,6 +12,7 @@ import './IssueListIssue.css';
 type Props = {
   history: Object,
   issue: IssueType,
+  online: boolean,
 };
 
 
@@ -42,6 +43,7 @@ export class IssueListIssue extends Component<Props> {
       participantCount,
       title,
     } = this.props.issue;
+
     return (
       <li className="IssueListIssue" onClick={this.handleClick(id)}>
         <a 
@@ -51,19 +53,13 @@ export class IssueListIssue extends Component<Props> {
           title={text('ViewProfile', 'IssueListIssue', { NAME: authorName })}
           onClick={(event) => {event.stopPropagation()}}
         >
-          <Avatar src={authorAvatarUrl} />
+          <Avatar src={authorAvatarUrl} online={this.props.online} />
         </a>
         <span className="IssueListIssue__title">{title}</span>
-        <span 
-          className="IssueListIssue__commentcount"
-          title={text('Count', 'IssueListIssue', { COUNT: commentCount })}
-        >
+        <span className="IssueListIssue__commentcount" title={text('Count', 'IssueListIssue', { COUNT: commentCount })}>
           <Icon type={ICON_COMMENT} /> {commentCount}
         </span>
-        <span 
-          className="IssueListIssue__participantcount"
-          title={text('ParticipantCount', 'IssueListIssue', { COUNT: participantCount })}
-        >
+        <span className="IssueListIssue__participantcount" title={text('ParticipantCount', 'IssueListIssue', { COUNT: participantCount })}>
           <Icon type={ICON_PARTICIPANTS} /> {participantCount}
         </span>
       </li>

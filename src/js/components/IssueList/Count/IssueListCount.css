@@ -1,0 +1,23 @@
+/* Issue List Count  */
+/* ----------------- */
+
+.IssueListCount {
+	margin: 0px auto;
+	padding: 15px 20px 15px 20px;
+	position: relative;
+	text-transform: uppercase;
+	color: var(--col-darken-4);
+	text-align: center;
+	line-height: var(--lh-reduced);
+}
+
+.IssueListCount strong {
+	display: inline-block;
+	padding: 0px 8px;
+}
+
+@media screen and (min-width: 1024px) {
+	.IssueListCount {
+		padding: 17px 20px 17px 20px;
+	}
+}

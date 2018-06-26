@@ -67,8 +67,10 @@ export class LoginLayout extends Component<Props, State> {
   }
 
   handleOnChange(event: SyntheticInputEvent<HTMLInputElement>) {
+    const { value } = event.target;
+
     try {
-      let validToken = tokenSchema.validateSync(event.currentTarget.value);
+      let validToken = tokenSchema.validateSync(value);
       this.setState({ token: validToken, step: 'default' }); // Default in case an error occured
     } catch (error) {
       // Error doesn't need showing as any transforms have already been done by yup.
@@ -76,10 +78,12 @@ export class LoginLayout extends Component<Props, State> {
   }
 
   handleOnKeyUp(event: SyntheticInputEvent<HTMLInputElement>) {
-    if (event.currentTarget.value !== '') {
+    const { value } = event.target;
+
+    if (value !== '') {
       if (event.key === 'Enter') {
         AppStorage.set(STORAGE_SSKEY, this.state.token);
-        this.setState({ token: this.state.token, step: 'checking' });
+        this.setState({ token: value, step: 'checking' });
       } else if (event.key === 'Escape' || event.key === 'Delete') {
         this.setState({ token: '' });
       }

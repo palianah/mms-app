@@ -67,7 +67,7 @@ describe('<LoginLayout />:', () => {
     expect(history.push.mock.calls[0][0]).toBe(ROUTE_ISSUES);
   });
   
-  describe.skip('handleOnKeyUp():', () => {
+  describe('handleOnKeyUp():', () => {
     test('Should change state if enter pressed & input is not empty', () => {
       const wrapper = mount(<LoginLayout {...props} store={store} />);
       const wrapperInput = wrapper.find('input');
@@ -81,6 +81,7 @@ describe('<LoginLayout />:', () => {
       const wrapper = mount(<LoginLayout {...props} initialToken="" store={store} />);
       const wrapperInput = wrapper.find('input');
 
+      wrapperInput.simulate('change', { target: { value: '' } });
       wrapperInput.simulate('keyUp', { key: 'Enter' });
       expect(wrapper.state().step).toBe('default');
       expect(wrapper.state().token).toBe('');

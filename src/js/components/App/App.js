@@ -25,7 +25,7 @@ class App extends Component<Props> {
         <div className="App">
           <Header repoName={this.props.repoName} loggedin={this.props.loggedin} dispatch={this.props.dispatch} />
           <div className="App__content">
-            <Panels loggedin={(!this.props.online) ? true : this.props.loggedin} />
+            <Panels loggedin={this.props.loggedin} />
           </div>
           {!this.props.online && <span className="App__offline">{text('Offline', 'App')}</span>}
         </div>

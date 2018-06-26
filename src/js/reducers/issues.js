@@ -6,18 +6,21 @@ import {
   ISSUES_FETCH_SUCCESS,
   ISSUES_FETCH_SUCCESS_CACHE,
   ISSUES_SEARCH,
+  USER_LOGOUT,
 } from '../constants/actionTypes';
 import { GQL_ASC, GQL_DESC } from '../constants/gql';
 import type { ActionObj } from '../types/action';
 import type { IssuesType } from '../types/issues';
-import defaultIssues from '../types/issues';
-
+import issuesDefault from '../types/issues';
 
 /**
 * Issues Reducer - just for settings about the issues.
 */
-export default function reducer(state: IssuesType = defaultIssues, action: ActionObj): Object {
+export default function reducer(state: IssuesType = issuesDefault, action: ActionObj): Object {
   switch (action.type) {
+    case USER_LOGOUT:
+      return {...issuesDefault };
+
     case ISSUES_FETCH:
       return {...state, fetching: true, error: false };
 

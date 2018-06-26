@@ -3,13 +3,13 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
 import IssueList from '../../components/IssueList/IssueList';
+import IssueListCount from '../../components/IssueList/Count/IssueListCount';
 import SearchBar from '../../components/SearchBar/SearchBar';
 import InfoMsg from '../../components/InfoMsg/InfoMsg';
 import Button from '../../components/ui/Button/Button';
 import { ICON_BUSY, ICON_ERROR } from '../../constants/icons';
 import type { DispatchType } from '../../types/functions';
 import type { IssuesType } from '../../types/issues';
-import type { IssueType } from '../../types/issue';
 import type { IssueDataType } from '../../types/issueData';
 import * as issueActions from '../../actions/issueActions';
 import gqlQuery from '../../gql/query';
@@ -53,7 +53,7 @@ export class IssuesLayout extends React.Component<Props> {
     const prevIssues = prevProps.issues
 
     if (this.props.issues.fetching !== true) {
-      if (curIssues.sort !== prevIssues.sort || curIssues.term != prevIssues.term) {
+      if (curIssues.sort !== prevIssues.sort || curIssues.term !== prevIssues.term) {
         this.makeRequest();
       }
     }
@@ -120,20 +120,17 @@ export class IssuesLayout extends React.Component<Props> {
 
   renderIssuesList() {
     const cacheKey = getQueryItemKey(this.props.issues);
-
+    const matchCount = (this.props.issueData[cacheKey]) ? this.props.issueData[cacheKey].length : 0;
+    
     return (
       <React.Fragment>
         {this.props.issues.totalCount > 0 && (
-          <p className="IssuesLayout__count">
-            <strong>{this.props.issues.totalCount}</strong> 
-            <Translation name="Match" ns="IssuesLayout" />
-            <strong>{this.props.repoOwner}/{this.props.repoName}</strong>
-          </p>
+          <IssueListCount matchCount={matchCount} repoName={this.props.repoName} repoOwner={this.props.repoOwner} totalCount={this.props.issues.totalCount} />
         )}
         <IssueList 
           hasNextPage={this.props.issues.hasNextPage} 
           history={this.props.history} 
-          issueCount={this.props.issues.totalCount} 
+          issueCount={matchCount} 
           issues={this.props.issueData[cacheKey] ? this.props.issueData[cacheKey] : []}
           makeRequest={this.makeRequest} 
           online={this.props.online}
@@ -144,12 +141,11 @@ export class IssuesLayout extends React.Component<Props> {
 
   render() {
     const { fetching, error } = this.props.issues;
-    const ready = !fetching && !error;
 
     return (
       <section className="IssuesLayout" data-error={error}>
         <SearchBar fetching={fetching} />
-        {ready && this.renderIssuesList()}
+        {this.renderIssuesList()}
         {fetching && this.renderFetching()}
         {error && this.renderError()}
       </section>

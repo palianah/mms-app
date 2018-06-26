@@ -11,7 +11,7 @@
     <link rel="shortcut icon" href="%PUBLIC_URL%/favicon.ico">
     <link rel="stylesheet" href="%PUBLIC_URL%/css/app-shell.css">
 
-    <!-- Translations only exist here, but n a real app they translations could be loaded via AJAX -->
+    <!-- Translations only exist here, but in a real app they could be loaded via AJAX -->
     <script>
       window.app = {
         translations: {
@@ -74,13 +74,22 @@
             "Avatar": {
               "Alt": "DE - Avatar"
             },
+            "HeaderLogout": {
+              "Logout": "DE - Logout"
+            },
             "IssuesLayout": {
               "ErrorFetching": "DE - Error(s) occurred whilst fetching issues",
-              "Fetching": "DE - Loading issues",
+              "Fetching": "DE - Retrieving Issues",
+              "Fetching_Term": "DE - Term:",
+              "Fetching_Sort": "DE - Sorting:",
+              "Fetching_Repo": "DE - Repository:",
+              "Match": "DE - Matching issues in",
               "Retry": "DE - Retry loading"
             },
             "IssueList": {
-              "Empty": "DE - No issues in repository"
+              "Empty": "DE - No issues in repository match your search criteria",
+              "LoadMore": "DE - Load More",
+              "MaybeOffine": "DE - If you are offline, there maybe issues but they cannot be collected now"
             },
             "IssueListIssue": {
               "Count": "DE - Comments: %COUNT%",
@@ -99,7 +108,9 @@
               "Message": "DE - Page or resource not found"
             },
             "SearchBar": {
+              "Asc": "DE - Sort ascending",
               "BtnLabel": "DE - Search",
+              "Desc": "DE - Sort decending",
               "Placeholder": "DE - Search issues..."
             },
             "Validation": {

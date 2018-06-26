@@ -6,7 +6,6 @@ import {
 } from '../constants/actionTypes';
 import reduce from '../utils/reducers';
 import type { ActionObj } from '../types/action';
-import type { IssueType } from '../types/issue';
 import type { IssueDataType } from '../types/issueData';
 import issueDefault from '../types/issue';
 import issueDataDefault from '../types/issueData';
