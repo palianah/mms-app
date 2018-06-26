@@ -119,7 +119,8 @@ export class IssuesLayout extends React.Component<Props> {
   }
 
   renderIssuesList() {
-    const cacheKey = getQueryItemKey(this.props.issues);
+    const listIssues = {...this.props.issues, endCursor: '' };
+    const cacheKey = getQueryItemKey(listIssues);
     const matchCount = (this.props.issueData[cacheKey]) ? this.props.issueData[cacheKey].length : 0;
     
     return (

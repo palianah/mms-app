@@ -10,7 +10,7 @@ import {
 import searchIssuesQuery from '../gql/queries/searchIssues';
 import type { IssuesType } from '../types/issues';
 import type { ActionCreator } from '../types/action';
-import AppStorage, { getQueryItemKey } from '../storage/appStorage';
+import AppStorage, { getQueryItemKey, ISSUE_PAGING_KEY } from '../storage/appStorage';
   
 
 /**
@@ -20,6 +20,9 @@ export function fetchIssues(gqlQuery: Function, config: Object, issues: IssuesTy
   return (dispatch, getState) => {
     dispatch({ type: ISSUES_FETCH });
 
+    const pagingInfoKey = getQueryItemKey(issues, ISSUE_PAGING_KEY);
+    const pagingInfo = AppStorage.get(pagingInfoKey);
+    
     let cacheKey = '';
     let cachedData = null;
 
@@ -34,7 +37,7 @@ export function fetchIssues(gqlQuery: Function, config: Object, issues: IssuesTy
       }
 
     } else {
-      const issuesQueryConfig = {
+      let issuesQueryConfig = {
         endCursor: config.endCursor,
         hasNextPage: config.hasNextPage,
         perPage: config.perPage,
@@ -45,6 +48,8 @@ export function fetchIssues(gqlQuery: Function, config: Object, issues: IssuesTy
         states: config.states,
         term: config.term,
       };
+
+      if (pagingInfo !== null) issuesQueryConfig = {...issuesQueryConfig, ...pagingInfo};
 
       return gqlQuery(searchIssuesQuery(issuesQueryConfig), config.token)
         .then((response: Object) => {

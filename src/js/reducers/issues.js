@@ -12,13 +12,14 @@ import { GQL_ASC, GQL_DESC } from '../constants/gql';
 import type { ActionObj } from '../types/action';
 import type { IssuesType } from '../types/issues';
 import issuesDefault from '../types/issues';
-import AppStorage, { getQueryItemKey, ISSUE_TOTAL_KEY } from '../storage/appStorage';
+import AppStorage, { getQueryItemKey, ISSUE_PAGING_KEY, ISSUE_TOTAL_KEY } from '../storage/appStorage';
 
 /**
 * Issues Reducer - just for settings about the issues.
 */
 export default function reducer(state: IssuesType = issuesDefault, action: ActionObj): Object {
   const CACHE_KEY = getQueryItemKey(state, ISSUE_TOTAL_KEY);
+  const CACHE_PAGING_KEY = getQueryItemKey(state, ISSUE_PAGING_KEY);
 
   switch (action.type) {
     case USER_LOGOUT:
@@ -41,6 +42,7 @@ export default function reducer(state: IssuesType = issuesDefault, action: Actio
           const { endCursor, hasNextPage } = action.payload.data.search.pageInfo;
           if (Array.isArray(edges)) {
             AppStorage.set(CACHE_KEY, issueCount);
+            AppStorage.set(CACHE_PAGING_KEY, { endCursor, hasNextPage });
             return {...state, fetching: false, error: false, totalCount: issueCount, endCursor, hasNextPage };
           }
         }
@@ -51,7 +53,8 @@ export default function reducer(state: IssuesType = issuesDefault, action: Actio
       if (action.payload !== undefined && action.payload.data !== undefined) {
         if (Array.isArray(action.payload.data)) {
           const TOTAL = AppStorage.get(CACHE_KEY);
-          return {...state, fetching: false, error: false, totalCount: TOTAL };
+          const PAGING = AppStorage.get(CACHE_PAGING_KEY);
+          return {...state, fetching: false, error: false, totalCount: TOTAL, endCursor: PAGING.endCursor, hasNextPage: PAGING.hasNextPage };
         }
       }
       break;
