@@ -21,8 +21,7 @@ export class IssueListCount extends Component<Props> {
   render() {
     return (
       <p className="IssueListCount">
-        <strong>{this.props.matchCount}</strong> / 
-        <strong>{this.props.totalCount}</strong> 
+        <strong>{this.props.matchCount} / {this.props.totalCount}</strong> 
         <Translation name="Match" ns="IssuesLayout" />
         <strong>{this.props.repoOwner}/{this.props.repoName}</strong>
       </p>

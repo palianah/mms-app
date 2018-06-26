@@ -77,7 +77,7 @@ export class LoginLayout extends Component<Props, State> {
     }
   }
 
-  handleOnKeyUp(event: SyntheticInputEvent<HTMLInputElement>) {
+  handleOnKeyUp(event: Object) {
     const { value } = event.target;
 
     if (value !== '') {

@@ -42,19 +42,31 @@ export class IssueList extends React.Component<Props> {
   }
 
   render() {
+    const {
+      hasNextPage,
+      history,
+      issueCount,
+      issues,
+      makeRequest,
+      online,
+    } = this.props;
+
     return (
       <div className="IssueList">
-        {this.props.issueCount < 1 ? (
+        {issueCount < 1 ? (
           this.renderEmpty()
         ) : (
           <React.Fragment>
             <ul className="IssueList__List">
-              {this.props.issues.map((issue: IssueType) => (
-                <IssueListIssue key={issue.id} issue={issue} history={this.props.history} online={this.props.online} />
+              {issues.map((issue: IssueType) => (
+                <IssueListIssue key={issue.id} issue={issue} history={history} online={online} />
               ))}
             </ul>
-            <div className="IssueList__paging" data-visible={this.props.online && this.props.hasNextPage}>
-              <Button onClick={this.props.makeRequest} title={text('LoadMore', 'IssueList')}>
+            {!online && (
+              <p className="IssueList__offlineinfo"><Translation name="OfflineInfo" ns="IssueList"/></p>
+            )}
+            <div className="IssueList__paging" data-visible={online && hasNextPage}>
+              <Button onClick={makeRequest} title={text('LoadMore', 'IssueList')}>
                   <Translation name="LoadMore" ns="IssueList"/>
               </Button>
             </div>

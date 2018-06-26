@@ -29,7 +29,6 @@ export class Panels extends Component<Props> {
   props: Props;
 
   render() {
-    console.log(this.props.loggedin);
     return (
       <div className="Panels">
         {this.props.loggedin ? (

@@ -12,8 +12,14 @@
 }
 
 .IssueListCount strong {
-	display: inline-block;
+	display: block;
 	padding: 0px 8px;
+}
+
+@media screen and (min-width: 550px) {
+	.IssueListCount strong {
+		display: inline-block;
+	}
 }
 
 @media screen and (min-width: 1024px) {

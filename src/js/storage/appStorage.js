@@ -5,10 +5,12 @@ import type { IssuesType } from '../types/issues';
 import type { IssueType } from '../types/issue';
 
 
-const MS_IN_A_DAY = 86400000;
-const ISSUE_DATA_KEY = 'issue_data';
-const ISSUE_DATA_KEY_TS = 'issue_data_ts';
-const ISSUE_DATA_CACHE_DURATION = MS_IN_A_DAY * 2;
+export const MS_IN_A_DAY = 86400000;
+export const ISSUE_TOTAL_KEY = 'issue_count';
+export const ISSUE_PAGING_KEY = 'issue_paging';
+export const ISSUE_DATA_KEY = 'issue_data';
+export const ISSUE_DATA_KEY_TS = 'issue_data_ts';
+export const ISSUE_DATA_CACHE_DURATION = MS_IN_A_DAY * 2;
 
 /**
  * A storage wrapper to hide the storage used from the rest of the app.
@@ -45,7 +47,7 @@ const ISSUE_DATA_CACHE_DURATION = MS_IN_A_DAY * 2;
     * Adds items to the cache. If there are none or the cache is stale they are added as is,
     * else they are appended if they don't exist.
     */
-    static addItems(items: Array<IssueType>, settings: IssuesType) {
+    static addItems(items: Array<IssueType>, settings: IssuesType): boolean {
         const cacheKey = getQueryItemKey(settings);
         const existingItemsTS = AppStorage.get(ISSUE_DATA_KEY_TS);
         const existingItems = AppStorage.get(cacheKey);
@@ -55,17 +57,17 @@ const ISSUE_DATA_CACHE_DURATION = MS_IN_A_DAY * 2;
         if (existingItems === null || isStale) {
             AppStorage.set(cacheKey, items, true);
             AppStorage.set(ISSUE_DATA_KEY_TS, newTs, true);
+            return true;
+
         } else {
             let newData = [...items];
-
-            if (Array.isArray(items)) {
-                items.forEach(i => {
-                    newData = reduce.arr.addObj(newData, i);
-                });
-            }
+            items.forEach(i => {
+                newData = reduce.arr.addObj(newData, i);
+            });
 
             AppStorage.set(cacheKey, newData, true);
             AppStorage.set(ISSUE_DATA_KEY_TS, newTs, true);
+            return false;
         }
     }
 
@@ -91,8 +93,9 @@ const ISSUE_DATA_CACHE_DURATION = MS_IN_A_DAY * 2;
  /**
   * Makes a cache key for items from the repo.
   */
-  export function getQueryItemKey(settings: IssuesType): string {
-    let newKey = `${ISSUE_DATA_KEY}_${settings.sort}_${settings.sortField}_${settings.term}_${settings.states}`;
+  export function getQueryItemKey(settings: IssuesType, key?: string): string {
+    const BASE_KEY = key || ISSUE_DATA_KEY;
+    let newKey = `${BASE_KEY}_${settings.sort}_${settings.sortField}_${settings.term}_${settings.states}_${settings.perPage}`;
     return fixKey(newKey);
   }
 

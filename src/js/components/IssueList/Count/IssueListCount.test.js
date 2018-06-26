@@ -11,6 +11,7 @@ configure({ adapter: new Adapter() });
 
 test('<IssueListCount />: Renders without crashing', () => {
   const props = {
+    matchCount: 2,
     repoName: 'React',
     repoOwner: 'Facebook',
     totalCount: 10,

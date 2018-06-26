@@ -12,11 +12,14 @@ import { GQL_ASC, GQL_DESC } from '../constants/gql';
 import type { ActionObj } from '../types/action';
 import type { IssuesType } from '../types/issues';
 import issuesDefault from '../types/issues';
+import AppStorage, { getQueryItemKey, ISSUE_TOTAL_KEY } from '../storage/appStorage';
 
 /**
 * Issues Reducer - just for settings about the issues.
 */
 export default function reducer(state: IssuesType = issuesDefault, action: ActionObj): Object {
+  const CACHE_KEY = getQueryItemKey(state, ISSUE_TOTAL_KEY);
+
   switch (action.type) {
     case USER_LOGOUT:
       return {...issuesDefault };
@@ -46,6 +49,7 @@ export default function reducer(state: IssuesType = issuesDefault, action: Actio
           const { edges, issueCount } = action.payload.data.search;
           const { endCursor, hasNextPage } = action.payload.data.search.pageInfo;
           if (Array.isArray(edges)) {
+            AppStorage.set(CACHE_KEY, issueCount);
             return {...state, fetching: false, error: false, totalCount: issueCount, endCursor, hasNextPage };
           }
         }
@@ -55,7 +59,8 @@ export default function reducer(state: IssuesType = issuesDefault, action: Actio
     case ISSUES_FETCH_SUCCESS_CACHE:
       if (action.payload !== undefined && action.payload.data !== undefined) {
         if (Array.isArray(action.payload.data)) {
-          return {...state, fetching: false, error: false, totalCount: action.payload.data.length };
+          const TOTAL = AppStorage.get(CACHE_KEY);
+          return {...state, fetching: false, error: false, totalCount: TOTAL };
         }
       }
       break;

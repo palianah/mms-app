@@ -60,7 +60,7 @@ export class SearchBar extends Component<Props, State> {
     this.validateSearch(value);
   }
 
-  handleOnKeyUp(event: SyntheticInputEvent<HTMLInputElement>) {
+  handleOnKeyUp(event: Object) {
     const { value } = event.currentTarget;
     const { sort } = this.state;
 
