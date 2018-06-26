@@ -29,7 +29,8 @@ export class IssueListIssue extends Component<Props> {
     this.handleClick = this.handleClick.bind(this);
   }
 
-  handleClick = (id: string) => (event: SyntheticInputEvent<HTMLInputElement>) => { 
+  handleClick = (event: Object, idPassed: string) => {
+    const id = idPassed || event.target.getAttribute('data-ud');
     this.props.history.push(ROUTE_ISSUE.replace(':issueId', id));
   }
 
@@ -45,7 +46,7 @@ export class IssueListIssue extends Component<Props> {
     } = this.props.issue;
 
     return (
-      <li className="IssueListIssue" onClick={this.handleClick(id)}>
+      <li className="IssueListIssue" data-id={id} onClick={this.handleClick}>
         <a 
           className="IssueListIssue__avatar"
           href={authorUrl}

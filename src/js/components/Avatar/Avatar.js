@@ -1,6 +1,6 @@
 // @flow
 
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import 'intersection-observer';
 import Observer from 'react-intersection-observer';
 import { text } from '../Translation/Translation';
@@ -15,7 +15,7 @@ type Props = {
 /**
 * An avatar image.
 */
-export class Avatar extends Component<Props> {
+export class Avatar extends PureComponent<Props> {
   props: Props;
 
   renderImg() {

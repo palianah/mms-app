@@ -55,7 +55,7 @@ export class SearchBar extends Component<Props, State> {
     this.submitSearch = this.submitSearch.bind(this);
   }
 
-  handleSearchChange(event: SyntheticInputEvent<HTMLInputElement>) {
+  handleSearchChange(event: Object) {
     const { value } = event.currentTarget;
     this.validateSearch(value);
   }
@@ -73,11 +73,11 @@ export class SearchBar extends Component<Props, State> {
     }
   }
 
-  handleClickAsc(event: SyntheticInputEvent<HTMLInputElement>) {
+  handleClickAsc(event: Object) {
     this.setState({ sort: GQL_ASC }, () => {this.submitSearch()});
   }
 
-  handleClickDesc(event: SyntheticInputEvent<HTMLInputElement>) {
+  handleClickDesc(event: Object) {
     this.setState({ sort: GQL_DESC }, () => {this.submitSearch()});
   }
 
@@ -86,15 +86,14 @@ export class SearchBar extends Component<Props, State> {
       let validSearch = searchSchema.validateSync(value);
       this.setState({ term: validSearch }, cb);
     } catch (error) {
-      // Error doesn't need showing as any transforms have already been done by yup.
+      throw 'search-invalid';
     }
   }
 
   submitSearch(term: string, sort: GQL_ASC | GQL_DESC) {
     const siTerm = term || this.state.term;
     const siSort = sort || this.state.sort;
-
-    this.props.searchIssues(siTerm, sort || siSort);
+    this.props.searchIssues(siTerm, siSort);
   }
 
   render() {
