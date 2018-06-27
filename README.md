@@ -8,6 +8,7 @@ It is bootstrapped with create-react-app
 * React Router for routing
 * Redux for state managment
 * Axios for fetching the data
+* YUP for validating user input
 * Has a caching system for data
 ** Localstorage at the moment but the storage could be replaced as it has an abstraction wrapped around LS
 * Works offline (assuming cached data - localStorage)
