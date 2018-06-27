@@ -86,7 +86,7 @@ export class SearchBar extends Component<Props, State> {
       let validSearch = searchSchema.validateSync(value);
       this.setState({ term: validSearch }, cb);
     } catch (error) {
-      throw 'search-invalid';
+      throw new Error('search-invalid');
     }
   }
 

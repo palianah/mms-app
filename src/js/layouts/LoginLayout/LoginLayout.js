@@ -73,7 +73,7 @@ export class LoginLayout extends Component<Props, State> {
       let validToken = tokenSchema.validateSync(value);
       this.setState({ token: validToken, step: 'default' }); // Default in case an error occured
     } catch (error) {
-      // Error doesn't need showing as any transforms have already been done by yup.
+      throw new Error('login-invalid');
     }
   }
 
