@@ -11,7 +11,7 @@ A test application to query Github's Graph QL API. The application should allow 
 * YUP for validating user input
 * Has a caching system for data (Localstorage at the moment but the storage could be replaced as it has an abstraction wrapped around LS)
 * Works offline (assuming cached data - localStorage)
-* Uses an intersection observe to load profile images in the list of issues
+* Uses an intersection observer to load profile images in the list of issues
 * Only tested on chrome as no time to do real browser testing
 * There are some bugs and a few things still to do... 
 
