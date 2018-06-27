@@ -54,7 +54,13 @@ export default function reducer(state: IssuesType = issuesDefault, action: Actio
         if (Array.isArray(action.payload.data)) {
           const TOTAL = AppStorage.get(CACHE_KEY);
           const PAGING = AppStorage.get(CACHE_PAGING_KEY);
-          return {...state, fetching: false, error: false, totalCount: TOTAL, endCursor: PAGING.endCursor, hasNextPage: PAGING.hasNextPage };
+          let pagingObj = {
+            endCursor: '',
+            hasNextPage: false
+          };
+
+          if (PAGING !== null) pagingObj = {...pagingObj, ...PAGING};
+          return {...state, fetching: false, error: false, totalCount: TOTAL, endCursor: pagingObj.endCursor, hasNextPage: pagingObj.hasNextPage };
         }
       }
       break;
