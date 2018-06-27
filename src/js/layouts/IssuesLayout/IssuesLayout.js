@@ -88,7 +88,6 @@ export class IssuesLayout extends React.Component<Props> {
   }
 
   renderError() {
-    console.log(this.props.issues);
     return (
       <InfoMsg icon={ICON_ERROR} msg={text('ErrorFetching', 'IssuesLayout')}>
         {this.props.issues.errorMsg.map((item: string | Object) => {
