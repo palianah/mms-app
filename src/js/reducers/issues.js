@@ -43,8 +43,10 @@ export default function reducer(state: IssuesType = issuesDefault, action: Actio
           let lastCursor = false;
 
           if (Array.isArray(edges)) {
-            const lastNode = edges[edges.length -1];
-            if (lastNode.cursor !== undefined) lastCursor = lastNode.cursor;
+            if (edges.length > 1) {
+              const lastNode = edges[edges.length -1];
+              if (lastNode.cursor !== undefined) lastCursor = lastNode.cursor;
+            }
 
             AppStorage.set(CACHE_KEY, issueCount);
             AppStorage.set(CACHE_PAGING_KEY, { endCursor: (lastCursor || endCursor), hasNextPage });
