@@ -12,7 +12,6 @@ import {
   ROUTE_ISSUES,
   ROUTE_LOGIN,
 } from '../../constants/routes';
-import './Panels.css';
 
 type Props = {
   history: Object,

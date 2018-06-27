@@ -11,25 +11,13 @@
 @import "./vars/ui.css";
 @import "./vars/zindexes.css";
 
-  /* Base */
+/* Base */
 @import "./base/normalize.css";
 @import "./base/keyframes.css";
 @import "./base/tags.css";
 
-.app-shell {
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	align-items: center;
-  margin: 0px;
-  padding: 0px;
-  width: 100%;
-  height: 100%;
-  background: #df0000;
-  color: #fff;
-}
-
-.app-shell .icofont {
-  color: inherit;
-  font-size: 100px;
-}
+/* Components */
+@import "./components/App.css";
+@import "./components/Header.css";
+@import "./components/Panels.css";
+@import "./components/InfoMsg.css";

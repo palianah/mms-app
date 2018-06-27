@@ -5,7 +5,6 @@ import Panels from '../Panels/Panels';
 import Header from '../Header/Header';
 import { text } from '../Translation/Translation';
 import type { DispatchType } from '../../types/functions';
-import './App.css';
 
 
 type Props = {

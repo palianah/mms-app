@@ -9,7 +9,6 @@ import {
 } from '../../constants/routes';
 import type { DispatchType, EventHandlerType } from '../../types/functions';
 import { logoutUser } from '../../actions/userActions';
-import './Header.css';
 
 type Props = {
   dispatch: DispatchType,

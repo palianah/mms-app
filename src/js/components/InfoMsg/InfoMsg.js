@@ -3,7 +3,6 @@
 import * as React from 'react';
 import Icon from '../Icon/Icon';
 import { ICON_LIST } from '../../constants/icons';
-import './InfoMsg.css';
 
 type Props = {
   children?: React.Node,
