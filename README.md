@@ -48,3 +48,7 @@ A test application to query Github's Graph QL API. The application should allow 
 
 **"npm run testc"**
 * Run jest coverage
+
+**Search the repo with the app for issues whilst online**
+
+**Go offline - really, don't use chromes dev tools - the CSS/Fonts are not served by CRA's serviceworker when simulated - at least not in my tests!**
