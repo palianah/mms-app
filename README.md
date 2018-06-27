@@ -1,6 +1,6 @@
 # mms-app
 
-A test application to query Github's Graph QL API. The application should allow the user to serch issues in facebook/react. issues and be sortable (asc/desc).
+A test application to query Github's Graph QL API. The application should allow the user to serch issues in facebook/react and be sortable (asc/desc).
 
 It is bootstrapped with create-react-app
 * Uses Jest for testing
