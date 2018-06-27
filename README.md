@@ -2,6 +2,9 @@
 
 A test application to query Github's Graph QL API. The application should allow the user to search issues in facebook/react and be sortable (asc/desc).
 
+## Time to make:
+6 Days (4 whilst working full time + the weekend) 
+
 ## It is bootstrapped with create-react-app
 * Uses Jest for testing
 * Flowtype for type checking
