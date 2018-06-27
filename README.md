@@ -25,18 +25,23 @@ Todo:
 * Test coverage is now 100% - there are still certain things to test
 
 To Run:
-* Clone repo
-* "npm install"
-* "npm run start"
-** Run the dev version
-* "npm run build"
-** Makes the production ready version
-** Install serve: "sudo npm install -g serve"
-** After building run
-*** "serve -s build"
-* "npm run test"
-** Run jest
-* "npm run testv"
-** Run jest in verbose mode
-* "npm run testc"
-** Run jest coverage
+*Clone repo*
+
+*"npm install"*
+
+*"npm run start"*
+* Run the dev version
+
+*"npm run build"*
+* Makes the production ready version
+* Install serve: "sudo npm install -g serve"
+* After building run "serve -s build" to server the build version
+
+*"npm run test"*
+* Run jest
+
+*"npm run testv"*
+* Run jest in verbose mode
+
+*"npm run testc"*
+* Run jest coverage
