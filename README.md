@@ -57,4 +57,6 @@ The search criteria are key value pairs (just like you see added in github's iss
 
 **Search the repo with the app for issues whilst online**
 
-**Go offline - really, don't use chromes dev tools - the CSS/Fonts are not served by CRA's serviceworker when simulated - at least not in my tests!**
+**Go offline - really, don't use chromes dev tools - the CSS/Fonts are not served by CRA's serviceworker when simulated - at least not in my tests! Switching on Aeropolane mode worked (at least on Ubuntu)**
+* naviagtor.onLine is always true if the browser can make a connection to a LAN or a router
+* Just turning the wifi in UBUNTU off didn't seem to change navigator.onLine
