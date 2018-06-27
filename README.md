@@ -23,7 +23,7 @@ A test application to query Github's Graph QL API. The application should allow 
 * Fix bugs in caching
 * Get caching to work before the network requests fire.
 * Offer the ability to change repo owner and name (actions and reducers exist but no time was available to allow this)
-* Test coverage is now 100% - there are still certain things to test
+* Test coverage is NOT 100% - there are still certain things to test
 
 ## To Run:
 **Clone repo**
