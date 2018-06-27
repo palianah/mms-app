@@ -32,6 +32,7 @@ The search criteria are key value pairs (just like you see added in github's iss
 * Test coverage is NOT 100% - there are still certain things to test
 * Dan Abramov's opinion is that 100% coverage is often unrealistic: https://github.com/facebook/create-react-app/issues/1386
 * Maybe for a test app like his it should be doable?
+* Currently the home layout is just a stub and now route matches it. It i sthere in case I had time to add a "home" page.
 
 ## To Run:
 **Clone repo**
