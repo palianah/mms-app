@@ -30,7 +30,7 @@ export default function reducer(state: IssuesType = issuesDefault, action: Actio
 
     case ISSUES_FETCH_ERROR:
       if (action.payload !== undefined && action.payload.errors !== undefined) {
-        const errorMsg = (action.payload.errors) ? action.payload.errors : [];
+        const errorMsg = (action.payload.errors) ? action.payload.errors: [];
         return {...state, fetching: false, error: true, errorMsg };
       }
       break;

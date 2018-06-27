@@ -88,10 +88,15 @@ export class IssuesLayout extends React.Component<Props> {
   }
 
   renderError() {
+    console.log(this.props.issues);
     return (
       <InfoMsg icon={ICON_ERROR} msg={text('ErrorFetching', 'IssuesLayout')}>
-        {this.props.issues.errorMsg.map((item: string) => {
-          return <p key={this.getErrorKey(item)}>{item}</p>
+        {this.props.issues.errorMsg.map((item: string | Object) => {
+          if (typeof item === 'string') {
+            return <p key={this.getErrorKey(item)}>{item}</p>
+          } else {
+            return <p key={this.getErrorKey(item.message)}>{item.message}</p>
+          }
         })}
         <p className="IssuesLayout__retry" onClick={this.makeRequest}>
           <strong>

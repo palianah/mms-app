@@ -7,7 +7,7 @@ import { setOnlineStatus } from '../actions/onlineActions';
 /**
  * Method to indicate to the user that the app is offline
  */
-export function appCheckConnection(event: Object, storeReq: Object) {
+export function appCheckConnection(event: Object, storeReq?: Object) {
   const dispatcher = storeReq || store;
   dispatcher.dispatch(setOnlineStatus(navigator.onLine));
 }
