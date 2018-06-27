@@ -23,3 +23,20 @@ Todo:
 * Get cahcing to work before the network requests fire.
 * Offer the ability to change repo owner and name (actions and reducers exist but no time was available to allow this)
 * Test coverage is now 100% - there are still certain things to test
+
+To Run:
+* Clone repo
+* > npm install
+* > npm run start
+** Run dev version
+* > npm run build
+** Makes the production ready version
+** Install serve (sudo npm install -g serve)
+** After building run
+*** > serve -s build
+* > npm run test
+** Run jest
+* > npm run testv
+** Run jest in verbose mode
+* > npm run testc
+** Run jest coverage
