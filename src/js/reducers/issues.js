@@ -40,10 +40,15 @@ export default function reducer(state: IssuesType = issuesDefault, action: Actio
         if (action.payload.data.search !== undefined && action.payload.data.search.edges !== undefined) {
           const { edges, issueCount } = action.payload.data.search;
           const { endCursor, hasNextPage } = action.payload.data.search.pageInfo;
+          let lastCursor = false;
+
           if (Array.isArray(edges)) {
+            const lastNode = edges[edges.length -1];
+            if (lastNode.cursor !== undefined) lastCursor = lastNode.cursor;
+
             AppStorage.set(CACHE_KEY, issueCount);
-            AppStorage.set(CACHE_PAGING_KEY, { endCursor, hasNextPage });
-            return {...state, fetching: false, error: false, totalCount: issueCount, endCursor, hasNextPage };
+            AppStorage.set(CACHE_PAGING_KEY, { endCursor: (lastCursor || endCursor), hasNextPage });
+            return {...state, fetching: false, error: false, totalCount: issueCount, endCursor: (lastCursor || endCursor), hasNextPage };
           }
         }
       }

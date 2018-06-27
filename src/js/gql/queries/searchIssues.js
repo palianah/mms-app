@@ -28,6 +28,7 @@ const searchIssuesQuery = (config: Object) => {
         endCursor
       }
       edges {
+        cursor
         node {
           ... on Issue {
             createdAt
