@@ -2,6 +2,10 @@
 
 A test application to query Github's Graph QL API. The application should allow the user to search issues in facebook/react and be sortable (asc/desc).
 
+The project's wiki contains links to useful information discovered whilst developing. 
+
+The search criteria are key value pairs (just like you see added in github's issues search box). See the wiki for a link containing possible terms/values.
+
 ## Time Spent Developing:
 6 Days (4 whilst working full time + a weekend) 
 
@@ -24,7 +28,7 @@ A test application to query Github's Graph QL API. The application should allow 
 * Get caching to work before the network requests fire.
 * Offer the ability to change repo owner and name (actions and reducers exist but no time was available to allow this)
 * Test coverage is NOT 100% - there are still certain things to test
-* Dan Abramov's opinion is that 100% coverage is oftem unrealistic: https://github.com/facebook/create-react-app/issues/1386
+* Dan Abramov's opinion is that 100% coverage is often unrealistic: https://github.com/facebook/create-react-app/issues/1386
 * Maybe for a test app like his it should be doable?
 
 ## To Run:
