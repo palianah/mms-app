@@ -33,7 +33,7 @@ A test application to query Github's Graph QL API. The application should allow 
 **"npm run build"**
 * Makes the production ready version
 * Install serve: "sudo npm install -g serve"
-* After building run "serve -s build" to server the build version
+* After building run "serve -s build" to start the build version
 
 **"npm run test"**
 * Run jest
