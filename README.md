@@ -17,6 +17,7 @@ The search criteria are key value pairs (just like you see added in github's iss
 * Axios for fetching the data
 * YUP for validating user input
 * Has a caching system for data (Localstorage at the moment but the storage could be replaced as it has an abstraction wrapped around LS)
+* The caching is primative due to time constraints
 * Is multilingual (using a translation component) - change the default lang in the HTML in the dev version to DE to view german - no real translation. just showing that it works.
 * Works offline (assuming cached data - localStorage)
 * Uses an intersection observer to load profile images in the list of issues
