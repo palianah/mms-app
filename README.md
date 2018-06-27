@@ -2,7 +2,7 @@
 
 A test application to query Github's Graph QL API. The application should allow the user to serch issues in facebook/react and be sortable (asc/desc).
 
-It is bootstrapped with create-react-app
+## It is bootstrapped with create-react-app
 * Uses Jest for testing
 * Flowtype for type checking
 * React Router for routing
@@ -16,7 +16,7 @@ It is bootstrapped with create-react-app
 * Only tested on chrome as no time to do real browser testing
 * There are some bugs and a few things still to do... 
 
-Todo:
+## Todo:
 * View issue in detail still not done
 ** Comments should be loaded here
 * Fix bugs in caching
@@ -24,24 +24,24 @@ Todo:
 * Offer the ability to change repo owner and name (actions and reducers exist but no time was available to allow this)
 * Test coverage is now 100% - there are still certain things to test
 
-To Run:
-*Clone repo*
+##To Run:
+**Clone repo**
 
-*"npm install"*
+**"npm install"**
 
-*"npm run start"*
+**"npm run start"**
 * Run the dev version
 
-*"npm run build"*
+**"npm run build"**
 * Makes the production ready version
 * Install serve: "sudo npm install -g serve"
 * After building run "serve -s build" to server the build version
 
-*"npm run test"*
+**"npm run test"**
 * Run jest
 
-*"npm run testv"*
+**"npm run testv"**
 * Run jest in verbose mode
 
-*"npm run testc"*
+**"npm run testc"**
 * Run jest coverage
