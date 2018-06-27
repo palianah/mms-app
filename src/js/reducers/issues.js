@@ -60,6 +60,7 @@ export default function reducer(state: IssuesType = issuesDefault, action: Actio
           };
 
           if (PAGING !== null) pagingObj = {...pagingObj, ...PAGING};
+          
           return {...state, fetching: false, error: false, totalCount: TOTAL, endCursor: pagingObj.endCursor, hasNextPage: pagingObj.hasNextPage };
         }
       }
