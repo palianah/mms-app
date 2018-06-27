@@ -22,3 +22,4 @@ Todo:
 * Fix bugs in caching
 * Get cahcing to work before the network requests fire.
 * Offer the ability to change repo owner and name (actions and reducers exist but no time was available to allow this)
+* Test coverage is now 100% - there are still certain things to test
