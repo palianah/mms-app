@@ -7,7 +7,7 @@ The project's wiki contains links to useful information discovered whilst develo
 The search criteria are key value pairs (just like you see added in github's issues search box). See the wiki for a link containing possible terms/values.
 
 ## Time Spent Developing:
-6 Days (4 whilst working full time + a weekend) 
+6 Days (4 whilst also working full time at my day job + a weekend) 
 
 ## It is bootstrapped with create-react-app
 * Uses Jest for testing
